@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-5.8.1-web/css/all.min.css">
     <title>Neutron Mail</title>
@@ -12,35 +11,35 @@
 
 <body>
     <header class="main-header grid">
-        <h3 class="neutron">neutron<span>Mail</span></h3>
+        <div class="navigation__row-left grid">
+            <h3 class="neutron">neutron<span>Mail</span></h3>
 
-        <ul class="language-container grid">
-            <li class="language-item language">
-                <a href="#">English</a>
-            </li>
-            <li class="language-item language">
-                <a href="#"> / </a>
-            </li>
+            <ul class="language-container grid">
+                <li class="language-item language">
+                    <a href="#"> English </a>
+                </li>
+                <!-- <li class="language-item language">
+                        <a href="#"> / </a>
+                    </li> -->
 
-            <li class="language-item language">
-                <a href="#"> French</a>
-            </li>
-            <li class="language-item language">
-                <a href="#"> / </a>
-            </li>
-            <li class="language-item language">
-                <a href="#"> Italian </a>
-            </li>
-            <li class="language-item language">
-                <a href="#"> / </a>
-            </li>
-            <li class="language-item language">
-                <a href="#"> Polish</a>
-            </li>
-            <li class="language-item language">
-                <a href="#"> / </a>
-            </li>
-        </ul>
+                <li class="language-item language">
+                    <a href="#"> French </a>
+                </li>
+                <!-- <li class="language-item language">
+                        <a href="#"> / </a>
+                    </li> -->
+                <li class="language-item language">
+                    <a href="#"> Italian </a>
+                </li>
+                <!-- <li class="language-item language">
+                        <a href="#"> / </a>
+                    </li> -->
+                <li class="language-item language">
+                    <a href="#"> Polish </a>
+                </li>
+            </ul>
+        </div>
+
 
         <nav class="navigation-section grid">
             <ul class="navigation-conteiner">
@@ -64,7 +63,7 @@
                 </li>
             </ul>
             <ul class="navigation-conteiner enter grid">
-                <li class="navigation-item login-button"><a href="#"> Log in </a></li>
+                <li class="navigation-item login-button"><a href="#"><i class="fas fa-sign-in-alt" aria-hidden="true" style="font-size: 16px;"></i> Log in </a></li>
                 <li class="navigation-item signup-button"><a href="#"> Sign up </a></li>
             </ul>
         </nav>
@@ -73,9 +72,11 @@
             <h1> Secure Email Communication </h1>
             <p class="main-subtitle"> Based in <span>Somewhere</span></p>
             <ul class="header-button">
-                <li class="button-creat"> <a href="#"> Create Account </a></li>
-                <li class="button-apple"><a href="#" class="apple"><i class="fab fa-apple" style="font-size: 22px;"></i></a></li>
-                <li class="button-android"> <a href="#" class="android"><i class="fab fa-google-play" style="font-size: 22px;"></i></a></li>
+                <li class="button-creat"> <a href="#"> Create account </a></li>
+                <li class="button-apple"><a href="#" class="apple"><i class="fab fa-apple"
+                            style="font-size: 22px;"></i></a></li>
+                <li class="button-android"> <a href="#" class="android"><i class="fab fa-google-play"
+                            style="font-size: 22px;"></i></a></li>
             </ul>
             <!-- <div class="social-icons"> -->
             <ul class="social-icons grid">
@@ -93,14 +94,8 @@
             </ul>
             <!-- </div> -->
         </div>
-
-
-
-
     </header>
-
-
-    <main class="main ">
+    <main class="main grid">
         <section class="security grid">
             <div class="security__main">
                 <h2>Physical Security </h2>
@@ -133,13 +128,48 @@
         </section>
         <section class="blog grid">
             <div class="journal grid">
-                <a href="#"><img src="./assets/images/wall_street_journal.jpg" alt="Wall street journal logo"></a>
-                <a href="#" ><img src="./assets/images/new-york-times-logo.jpg" alt="New York Times"></a>
-                <a href="#"><img src="./assets/images/theguardian_logo.jpg" alt=""></a>
-                <a href="#"><img src="./assets/images/logo-forbes.png" alt="forbes logo"></a>
-                <a href="#"><img src="./assets/images/FAZ-Logo.jpg" alt="Frankfurter Allgemeine"></a>
-                <a href="#"><img src="./assets/images/Logo-Fox-News.png" alt="Fox news logo"></a>
+                <a href="#"><img src="./assets/images/wall_street_journal_logo.png" alt="Wall street journal logo"></a>
+                <a href="#"><img src="./assets/images/new-york-times-logo.png" alt="New York Times"></a>
+                <a href="#"><img src="./assets/images/theguardiun_logo.png" alt=""></a>
+                <a href="#"><img src="./assets/images/forbes_logo.png" alt="forbes logo"></a>
+                <a href="#"><img src="./assets/images/fran.png" alt="Frankfurter Allgemeine"></a>
+                <a href="#"><img src="./assets/images/fox_news_logo.png" alt="Fox news logo"></a>
             </div>
+            <div class="slider-wrap">
+                <input type="radio" name="slides" id="point1" checked>
+                <input type="radio" name="slides" id="point2">
+                <input type="radio" name="slides" id="point3">
+                <div class="slider-comments">
+                    <p class="comment-one">
+                        A new email service being developed by a group from MIT and CERN promises to bring secure,
+                        encrypted email to the masses and keep sensitive information away from prying eyes.<span> —
+                            Boston Herald </span>
+                    </p>
+                </div>
+                <div class="control">
+                    <label for="point1"></label>
+                    <label for="point2"></label>
+                    <label for="point3"></label>
+                </div>
+            </div>
+            <div class="download">
+                <h3> Any device, anywhere </h3>
+                <p>
+                    The NeutronMail inbox is optimized for productivity.
+                    Each detail within our secure email service is optimized to help you better read, organize,
+                    and send email.
+                </p>
+                <div class="download-link">
+                    <a href="#" class="download-apple">
+                        <img src="./assets/images/downloadapple.png" alt="appple_logo">
+                    </a>
+                    <a href="#" class="download-android">
+                        <img src="./assets/images/download_google_play.png" alt="android-logo">
+                    </a>
+                </div>
+                <img src="./assets/images/devices.png" alt="devices" class="blog-background">
+            </div>
+
 
         </section>
 
