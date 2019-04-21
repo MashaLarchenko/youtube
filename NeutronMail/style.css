@@ -229,12 +229,10 @@ h1 {
     position: fixed;
     top: 44.1%;
     right: 1.9%;
-
     grid-column: 3;
     grid-row-gap: 15px;
     grid-template-rows: repeat(3, 1fr);
     justify-items: right;
- 
 }
 
 .social-icons .fab {
@@ -324,9 +322,8 @@ h1 {
 }
 
 .main {
-    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: repeat(3, 1fr);
-    min-height: 100vh;
 }
 
 .security {
@@ -411,14 +408,12 @@ h1 {
     bottom: 26%;
 }
 
-
 .security__email::before {
     content: url(./assets/images/iconEmail.png);
     position: relative;
     left: -14px;
     top: -3px;
 }
-
 
 .security-about {
     position: relative;
@@ -428,9 +423,7 @@ h1 {
     font-size: 0.9rem;
     line-height: 1.55;
     color: #959393;
-
 }
-
 
 .security-title {
     font-size: 30px;
@@ -489,7 +482,6 @@ h2 {
 
 .blog {
     grid-template-columns: 3fr 2fr 2fr;
-    grid-template-rows: 1fr 2fr 3fr;
 }
 
 .journal {
@@ -504,7 +496,7 @@ h2 {
 
 .slider-wrap {
     position: relative;
-    top: 29%;
+    top: 26%;
     grid-row: 1;
     align-self: center;
     grid-column: 1;
@@ -550,10 +542,9 @@ h2 {
     position: relative;
     align-self: center;
     left: 70%;
-    bottom: 85px;
+    bottom: -52px;
     grid-row: 2;
     grid-column: 1/3;
-
 }
 
 .download-content {
@@ -569,7 +560,6 @@ h2 {
     font-weight: normal;
     text-align: end;
     font-size: 2.25rem;
-  
 }
 
 .download-content p {
@@ -594,16 +584,194 @@ h2 {
     z-index: 2;
 }
 
+.donate {
+    grid-template-rows: 0.5fr 0.5fr 2.5fr;
+    grid-row: 3;
+    grid-column: 1/4;
+    padding-top: 9.7%;
+    justify-self: center;
+    align-self: center;
+}
+
+.donate .donate_text-first {
+    font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
+    font-size: 2.3rem;
+    text-align: center;
+    line-height: 1;
+    color: #535353;
+}
+
+.donate .donate_text-second {
+    font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
+    font-size: 1.8rem;
+    word-spacing: 1px;
+    text-align: justify;
+    color: #7c7c7c;
+}
+
+.donate .donate_button_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.donate .donate_button_container .upgrade-button {
+    align-self: center;
+    position: relative;
+    left: 5%;
+    top: 2%;
+    display: block;
+    height: 56px;
+    width: 250px;
+    grid-column: 1;
+    color: #fff;
+    background-color: #60316b;
+    justify-self: end;
+    text-align: center;
+    border-radius: 31px;
+    padding: 14px;
+    font-family: 'Titillium Web Bold', 'Myriad Pro Regular', sans-serif;
+    font-size: 1.2rem;
+}
+
+.donate .donate_button_container .donate-button {
+    position: relative;
+    left: -28%;
+    top: 28%;
+    display: block;
+    height: 53px;
+    width: 167px;
+    grid-column: 2;
+    color: #fff;
+    background-color: #5e7bea;
+    justify-self: end;
+    text-align: center;
+    border-radius: 31px;
+    padding: 10px;
+    font-family: 'Titillium Web Bold', 'Myriad Pro Regular', sans-serif;
+    font-size: 1.2rem;
+}
+
 footer {
     display: grid;
-    grid-template-rows: 1fr 3fr;
+    grid-template-columns: 2.5fr 2fr 2fr;
+    grid-template-rows: 0.5fr 3fr 1fr 1fr;
+}
 
+footer h6 {
+    position: relative;
+    left: 247%;
+    bottom: 20%;
+    font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
+    font-size: 0.9rem;
 }
 
 .footer-navigation {
-    grid-row:2;
-    grid-template-columns: 3fr 1fr 1fr 1fr;
+    grid-row: 2;
+    grid-column: 1/3;
+    grid-template-columns: 0.5fr 2fr 2fr 1fr 1fr 1fr;
 }
+
+footer .support-company {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-row: 1;
+    grid-column: 2;
+    justify-self: end;
+    text-align: center;
+}
+
+.footer-navigation .contact {
+    position: relative;
+    top: 25%;
+    padding-left: 32%;
+    grid-column: 2;
+    text-align: left;
+    align-self: center;
+}
+
+.footer-navigation .contact p{
+    font-size: 1rem;
+    color: #5c5c5c;
+}
+
+.contact_conteiner  {
+    padding-bottom: 11%;
+}
+
+.contact p>a {
+    font-family: 'Titillium Web Bold', 'Myriad Pro Regular', sans-serif;
+    font-size: 0.9rem;
+    color: #5c5c5c;  
+} 
+
+.contact_conteiner li {
+    font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
+    font-size: 0.9rem;
+    color: #5c5c5c;
+}
+
+.contact_conteiner li a {
+    font-family: 'Titillium Web Bold', 'Myriad Pro Regular', sans-serif;
+    font-size: 0.9rem;
+    color: #5c5c5c;
+}
+
+
+
+.footer-navigation>div {
+    position: relative;
+    align-self: end;
+    justify-self: left;
+    text-align: right;
+}
+
+.nav_conteiner li>a {
+    font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
+    font-size: 0.9rem;
+    color:#5c5c5c;
+    line-height: 1.7;
+}
+
+
+.company_navy {
+    top: 10%;
+    right: 7%;
+    grid-column: 4;
+}
+
+
+.company_navy h5{
+    padding-bottom: 29%;
+} 
+
+
+.legal_navy {
+    top: 10%;
+    right: 9%;
+}
+
+.legal_navy h5{
+    padding-bottom: 15%;
+} 
+
+.neutron_navy {
+    top: 10.5%;
+    left: 11%;
+}
+
+.neutron_navy h5 {
+    padding-bottom: 21%;
+} 
+
+.footer-navigation>div h5 {
+        font-family: 'Titillium Web Bold', 'Myriad Pro Regular', sans-serif;
+        font-size: 1.1rem;
+        color:#5c5c5c;
+}
+
+
+
+
 
 /* .main{
 
@@ -612,15 +780,17 @@ footer {
     background-position-x: 78%;
     background-repeat: no-repeat;
 } */
-        /* background-size: cover; 
+
+/* background-size: cover; 
 }
 
 /* .download {
     background-image:  url(./assets/images/devices.png);
         /* background-size: cover; */
-    /* background-position: right;
+
+/* background-position: right;
     background-repeat: no-repeat;
-} */ 
+} */
 
 /* 
 .blog-background {
