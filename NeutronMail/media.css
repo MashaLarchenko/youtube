@@ -34,26 +34,26 @@
     .security {
         grid-template-columns: 50px 3fr 3fr 3fr 100px;
     }
-    .security__privacy {
+    .security-privacy {
         padding-left: 27px;
         grid-column: 2;
     }
-    .security__privacy::after {
+    .security-privacy::after {
         display: none;
     }
     *::after {
         display: none;
     }
-    .security__encryption {
+    .security-encryption {
         grid-column: 3;
     }
-    .security__email {
+    .security-email {
         grid-column: 4;
     }
-    .security__email:after {
+    .security-email:after {
         display: none;
     }
-    .security__main:after {
+    .security-main:after {
         display: none;
     }
     .horizontal-email {
@@ -76,7 +76,7 @@
         bottom: 0px;
         right: -27px;
     }
-    .donate_button_container .donate-button {
+    .donate-button-container .donate-button {
         top: 5%;
     }
     .download {
@@ -134,13 +134,13 @@
         grid-template-columns: 20px 3fr 3fr 3fr 100px;
         grid-gap: 0;
     }
-    .security__privacy h3 {
+    .security-privacy h3 {
         bottom: 33%;
     }
-    .security__encryption h3 {
+    .security-encryption h3 {
         bottom: 33%;
     }
-    .security__email h3 {
+    .security-email h3 {
         bottom: 33%;
     }
     .security-title {
@@ -152,15 +152,15 @@
     .security-about {
         font-size: 0.9rem;
     }
-    .security__main {
+    .security-main {
         grid-column: 1 / 4;
     }
-    .security__main a {
+    .security-main a {
         left: 117px;
         padding: 14px 17px;
         font-size: 0.9rem;
     }
-    .security__main h2 {
+    .security-main h2 {
         font-size: 42px;
     }
     .security-info {
@@ -189,10 +189,10 @@
     .donate-button a {
         font-size: 0.95rem;
     }
-    .donate .donate_text-first {
+    .donate .donate-text-first {
         font-size: 2.1rem;
     }
-    .donate .donate_text-second {
+    .donate .donate-text-second {
         font-size: 1.5rem;
     }
     .donate-button {
@@ -240,15 +240,15 @@
     footer .support-company {
         grid-row: 1;
     }
-    .company_navy {
+    .company-navy {
         top: 37%;
         right: 80%;
     }
-    .legal_navy {
+    .legal-navy {
         top: 37%;
         right: 104%;
     }
-    .neutron_navy {
+    .neutron-navy {
         top: 36.5%;
         left: -81%;
     }
@@ -278,14 +278,14 @@
         position: relative;
         top: 5%;
     }
-    .social_navy {
+    .social-navy {
         right: 16.5%;
         top: -105%;
     }
-    .donate .donate_text-first {
+    .donate .donate-text-first {
         font-size: 2rem;
     }
-    .donate .donate_text-second {
+    .donate .donate-text-second {
         font-size: 1.3rem;
         padding-bottom: 10px;
     }
@@ -338,27 +338,27 @@
         grid-template-columns: 93px 3fr 3fr 100px;
         grid-template-rows: 1fr 1fr;
     }
-    .security__main {
+    .security-main {
         display: none;
     }
-    .security__privacy {
+    .security-privacy {
         padding-left: 27px;
         grid-column: 2;
     }
-    .security__privacy h3 {
+    .security-privacy h3 {
         left: 26%;
     }
-    .security__encryption {
+    .security-encryption {
         grid-column: 3;
     }
-    .security__encryption h3 {
+    .security-encryption h3 {
         left: 22%;
     }
-    .security__email {
+    .security-email {
         grid-column: 2;
         grid-row: 2;
     }
-    .security__email h3 {
+    .security-email h3 {
         left: 22%;
     }
     .journal {
@@ -388,10 +388,10 @@
         padding-left: 44%;
         font-size: 0.8rem;
     }
-    .donate .donate_text-first {
+    .donate .donate-text-first {
         font-size: 2rem;
     }
-    .donate .donate_text-second {
+    .donate .donate-text-second {
         font-size: 1.3rem;
         padding-bottom: 10px;
     }
@@ -413,18 +413,18 @@
         grid-row: 1;
         grid-column: 1;
     }
-    .company_navy {
+    .company-navy {
         grid-row: 1;
         grid-column: 4/5;
         top: 17%;
         right: 16%;
     }
-    .legal_navy {
+    .legal-navy {
         grid-row: 2;
         top: 54%;
         right: -28%;
     }
-    .neutron_navy {
+    .neutron-navy {
         grid-row: 2;
         grid-column: 3/4;
         top: 57.5%;
@@ -453,16 +453,16 @@
         right: 18%; 
     }
 
-    .security__privacy {
+    .security-privacy {
         grid-row: 1;
         grid-column: 1/4;
     }
 
-    .security__encryption {
+    .security-encryption {
         grid-row: 2;
         grid-column: 1/4;
     }
-    .security__email {
+    .security-email {
         grid-row: 3;
         grid-column: 1/4;
     }
