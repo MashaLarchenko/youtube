@@ -14,8 +14,8 @@
 @font-face {
     font-family: 'Titillium Web SemiBold';
     src: url(./assets/fonts/TitilliumWeb-Bold.ttf) format('truetype');
-    /* font-weight: 600;
-    font-style: normal; */
+     font-weight: 600;
+    font-style: normal; 
 }
 
 @font-face {
@@ -77,7 +77,6 @@ body {
     color: #454545;
     font-size: 1rem;
     font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
-    font-weight: normal;
 }
 
 .navigation-item a:hover {
@@ -113,12 +112,12 @@ body {
     position: relative;
     top: 1%;
     left: 22%;
-    color: #fff;
+    padding: 8px 22px 11px;
     font-size: 1rem;
     font-family: 'Titillium Web Bold', 'Myriad Pro Regular', sans-serif;
     font-weight: 700;
+    color: #fff;
     border-radius: 23px;
-    padding: 8px 22px 11px;
     background: linear-gradient(to top left, #6275cb, #582c7e);
 }
 
@@ -155,12 +154,12 @@ body {
 .language-container {
     position: relative;
     left: 4%;
+    width: max-content;
     grid-column: 2;
     grid-row: 1;
     grid-template-columns: repeat(4, 1fr);
     align-items: center;
     justify-content: center;
-    width: max-content;
 }
 
 .language-container li+li:before {
@@ -204,14 +203,14 @@ body {
 h1 {
     position: relative;
     bottom: -17px;
-    text-align: center;
-    color: #5f5f5f;
-    font-size: 3.8rem;
     grid-row: 1;
-    grid-column: 1/4;
-    align-self: end;
     font-family: 'Titillium Web SemiBold', 'Myriad Pro Regular', sans-serif;
     font-weight: 300;
+    font-size: 3.8rem;
+    text-align: center;
+    grid-column: 1/4;
+    align-self: end;
+    color: #5f5f5f;
 }
 
 .main-subtitle {
@@ -235,8 +234,8 @@ h1 {
 
 .social-icons {
     position: fixed;
-    top: 32.7%;
-    right: 1.9%;
+    top: 32.3%;
+    right: 2%;
     grid-column: 3;
     grid-row-gap: 15px;
     grid-template-rows: repeat(3, 1fr);
@@ -300,14 +299,14 @@ h1 {
 }
 
 .button-creat a {
-    color: #fff;
     font-size: 18px;
     font-family: 'Titillium Web Bold', 'Myriad Pro Regular', sans-serif;
+    color: #fff;
 }
 
-.button-creat a:hover {
-    color: #efd5fc;
+.button-creat a:hover { 
     font-weight: 600;
+    color: #efd5fc;
     text-decoration-line: underline;
 }
 
@@ -318,20 +317,20 @@ h1 {
 }
 
 .fa-apple {
+    padding: 12px 15px;
     color: #fff;
     background-color: #724a81;
     border-radius: 100%;
-    padding: 12px 15px;
     -webkit-box-shadow: 41px 7px 29px -3px #6e7eb8;
     -moz-box-shadow: 41px 7px 29px -3px #6e7eb8;
     box-shadow: 41px 7px 29px -3px #6e7eb8;
 }
 
 .fa-google-play {
+    padding: 12px 13px 12px;
     color: #fff;
     background-color: #724a81;
     border-radius: 100%;
-    padding: 12px 13px 12px;
     -webkit-box-shadow: 29px 0px 37px -3px #6e7eb8;
     -moz-box-shadow: 29px 0px 37px -3px #6e7eb8;
     box-shadow: 29px 0px 37px -3px #6e7eb8;
@@ -354,16 +353,16 @@ h1 {
 .button-android {
     grid-column: 3/4;
     grid-row: 1;
-    text-align: left;
     padding-top: 10px;
     padding-left: 68px;
+    text-align: left;
     align-self: center;
 }
 
 .main {
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: repeat(3, 1fr);
-    background-image: url(./assets/images/devices.png), linear-gradient(-7deg, #fff 0%, #efefef 48%, #f8f8f8 45%, #fff 45%);
+    background-image: url(./assets/images/devices.png), linear-gradient(-6.5deg, #fff 0%, #efefef 47%, #f8f8f8 45%, #fff 45%);
     background-repeat: no-repeat;
     background-position-x: 78%;
     background-position-y: 67.5%;
@@ -382,9 +381,9 @@ h1 {
 .security-main {
     grid-row: 2;
     grid-column: 2 / 4;
-    text-align: right;
     padding-right: 27px;
     padding-top: 4px;
+    text-align: right;
 }
 
 .security-privacy {
@@ -398,8 +397,8 @@ h1 {
 .security-privacy h3 {
     position: relative;
     left: 16%;
-    word-spacing: 4px;
     bottom: 26%;
+    word-spacing: 4px;
 }
 
 .security-privacy::before {
@@ -420,8 +419,8 @@ h1 {
 .security-encryption h3 {
     position: relative;
     left: 16%;
-    word-spacing: 4px;
     bottom: 26%;
+    word-spacing: 4px;
 }
 
 .security-encryption::before {
@@ -451,8 +450,8 @@ h1 {
 .security-email h3 {
     position: relative;
     left: 16%;
-    word-spacing: 4px;
     bottom: 26%;
+    word-spacing: 4px;
 }
 
 .security-email::before {
@@ -466,7 +465,6 @@ h1 {
     position: relative;
     bottom: 82px;
     font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
-    font-weight: normal;
     font-size: 0.9rem;
     line-height: 1.55;
     color: #959393;
@@ -476,32 +474,28 @@ h1 {
     font-size: 30px;
     color: #555555;
     font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
-    font-weight: normal;
 }
 
 .security-subtitle {
     position: relative;
     bottom: 83px;
     left: 57px;
-    font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
-    font-weight: normal;
-    color: #959393;
-    font-size: 1.2rem;
     margin-bottom: 25px;
+    font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
+    font-size: 1.2rem;
+    color: #959393;
 }
 
 h2 {
-    color: #535353;
     font-size: 60px;
     font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
-    font-weight: normal;
+    color: #535353;
 }
 
 .security-info {
     padding-left: 48px;
     font-size: 1.5rem;
     font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
-    font-weight: normal;
     word-spacing: 1.8px;
     line-height: 1;
     color: #959393;
@@ -510,7 +504,6 @@ h2 {
 .security-info span {
     font-size: 24px;
     font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
-    font-weight: normal;
     color: #fc6c6e;
 }
 
@@ -527,7 +520,6 @@ h2 {
     padding: 17px 35px;
     font-size: 1rem;
     font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
-    font-weight: normal;
     border: 1px solid #b9b9b9;
     border-radius: 45px;
     color: #666;
@@ -599,18 +591,18 @@ h2 {
     display: none;
 }
 
-.comment-one {
-    color: #000;
+.comment-one { 
     font-size: 1.5rem;
     font-family: 'Malaga RegItalic', 'Myriad Pro Regular', sans-serif;
     line-height: 1.3;
+    color: #000;
 }
 
 .comment-one span {
-    color: #727272;
     font-size: 1rem;
     font-family: 'Malaga RegItalic', 'Myriad Pro Regular', sans-serif;
     line-height: 1.3;
+    color: #727272;
 }
 
 .slider-wrap .control {
@@ -632,9 +624,9 @@ h2 {
 }
 
 #point1:checked~.control label:nth-of-type(1), #point2:checked~.control label:nth-of-type(2), #point3:checked~.control label:nth-of-type(3) {
-    background-color: #101010;
     height: 13px;
     width: 13px;
+    background-color: #101010;
 }
 
 .download {
@@ -652,7 +644,6 @@ h2 {
     left: 39%;
     width: 328px;
     font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
-    font-weight: normal;
     text-align: end;
     font-size: 2.25rem;
     color: #535353;
@@ -665,8 +656,8 @@ h2 {
     font-size: 1rem;
     text-align: end;
     letter-spacing: 0.1px;
-    color: #959393;
     line-height: 1.4;
+    color: #959393;
 }
 
 .download-link {
@@ -676,10 +667,6 @@ h2 {
     padding-left: 25%;
     grid-template-columns: 1fr 2fr;
     grid-gap: 13px;
-}
-
-.download-android {
-    z-index: 2;
 }
 
 .donate {
@@ -716,6 +703,7 @@ h2 {
     position: relative;
     left: 5%;
     top: -21%;
+    padding: 15px;
     display: block;
     height: 57px;
     width: 247px;
@@ -724,21 +712,20 @@ h2 {
     text-align: center;
     align-self: center;
     border-radius: 31px;
-    padding: 15px;
 }
 
 .donate-button-container .donate-button {
     position: relative;
     left: -28%;
     top: -20%;
+    padding: 10px;
     display: block;
     height: 53px;
     width: 167px;
     grid-column: 2;
     justify-self: end;
     text-align: center;
-    border-radius: 31px;
-    padding: 10px;
+    border-radius: 31px; 
 }
 
 .donate-button {
@@ -770,7 +757,6 @@ h2 {
 }
 
 .donate-button-container .donate-button a {
-    color: #fff;
     font-family: 'Titillium Web Bold', 'Myriad Pro Regular', sans-serif;
     font-size: 1.1rem;
     color: #fff;
@@ -895,29 +881,29 @@ footer .support-company {
 }
 
 .contact-conteiner li a:hover {
-    color: #242323;
     font-weight: 600;
     text-decoration-line: underline;
+    color: #242323;
 }
 
 .contact-conteiner p a:hover {
-    color: #242323;
     font-weight: 600;
     text-decoration-line: underline;
+    color: #242323;
 }
 
 .nav-conteiner li>a {
     font-family: 'Titillium Web Regular', 'Myriad Pro Regular', sans-serif;
     font-size: 0.9rem;
-    color: #5c5c5c;
     line-height: 1.7;
     letter-spacing: 0.15px;
+    color: #5c5c5c;
 }
 
 .nav-conteiner li>a:hover {
-    color: #242323;
     font-weight: 600;
     text-decoration-line: underline;
+    color: #242323;
 }
 
 .company-navy {
