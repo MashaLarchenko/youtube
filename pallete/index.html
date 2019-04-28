@@ -22,7 +22,7 @@
      <a href="#"> Transform </a>
     </nav>
   </header>
-  <main>
+  <main class="main">
       <section class="pallete">
           <ul class="tools-container">
               <li class="tool-item"> 
@@ -45,23 +45,35 @@
       </section>
       <section class="color">
           <ul class="color-container">
-              <li class="color-item"> Current color </li>
-              <li class="color-item"> Prev color </li>
-              <li class="color-item"> red </li>
-              <li class="color-item"> blue </li>
+              <li class="color-item"> 
+                <div class="current-color" ></div>
+                Current color </li>
+              <li class="color-item">
+                <div class="prev-color"></div> 
+                Prev color </li>
+              <li class="color-item">
+                <div class="red-color"></div>
+                 red </li>
+              <li class="color-item">
+                <div class="blue-color"></div>
+                 blue </li>
+                 <li class="color-item">
+                     <input type="color">
+                     Custom color
+                 </li>
           </ul>
       </section>
       <section class="canvas">
           <div class="figure-wrapper">
-              <div class="figure-item"></div>
-              <div class="figure-item"></div>
-              <div class="figure-item"></div>
-              <div class="figure-item"></div>
-              <div class="figure-item"></div>
-              <div class="figure-item"></div>
-              <div class="figure-item"></div>
-              <div class="figure-item"></div>
-              <div class="figure-item"></div>
+              <div class="figure-item square"></div>
+              <div class="figure-item square"></div>
+              <div class="figure-item square"></div>
+              <div class="figure-item square"></div>
+              <div class="figure-item square"></div>
+              <div class="figure-item square"></div>
+              <div class="figure-item circle"></div>
+              <div class="figure-item square"></div>
+              <div class="figure-item square"></div>
           </div>
       </section>
   </main>
