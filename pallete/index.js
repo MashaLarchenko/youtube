@@ -4,7 +4,7 @@ const paintBucket = document.querySelector(".paint-bucket");
 
 const move = document.querySelector(".move");
 
-const transfotm = document.querySelector(".transfotm");
+const transfotm = document.querySelector(".transform");
 
 const currentColor = document.querySelector('.current-color');
 
@@ -23,13 +23,13 @@ const state = {
 };
 
 tools.addEventListener('click', (event) => {
-    if (event.target === colorPicker) {
+    if (event.target.classList.contains('choose-color')) {
         state.currentTool = 'colorPicker';
     } else if (event.target.classList.contains('paint-bucket')) {
         state.currentTool = 'paintBucket';
-    } else if (event.target === move) {
+    } else if (event.target.classList.contains('move')) {
         state.currentTool = 'move';
-    } else if (event.target === transfotm) {
+    } else if (event.target.classList.contains('transform')) {
         state.currentTool = 'transform';
     } else {
         state.currentTool = '';
@@ -38,14 +38,27 @@ tools.addEventListener('click', (event) => {
     console.log(state.currentTool);
 });
 
-
 figureElem.addEventListener('click', (event) => {
+    console.log(state.currentTool);
     if (state.currentTool === 'paintBucket') {
         let elem = event.target;
         elem.style.backgroundColor = window.getComputedStyle(currentColor).backgroundColor;
         console.log(elem.style.backgroundColor);
+    } else if (state.currentTool === 'transform') {
+        changeShape(event);
     }
+
 });
+
+function changeShape(event) {
+  if (event.target.classList.contains('square')) {
+    event.target.classList.remove('square');
+    event.target.classList.add('circle');
+  } else {
+    event.target.classList.add('square');
+    event.target.classList.remove('circle');
+  }
+}
 
 
 
