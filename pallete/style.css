@@ -30,7 +30,7 @@ body {
     display: grid;
     grid-row: 2;
     grid-template-columns: 100px 1fr 2fr 2fr ;
-    grid-template-rows: 1fr 1fr; 
+    grid-template-rows: 1fr 1fr  50px; 
     grid-template-areas:  ". palette . canvas" 
                          ". colorcont . canvas"; 
 }
@@ -87,7 +87,7 @@ button {
 }
 
 .color-item {
-    padding: 25px 55px 25px 30px;
+    padding: 20px 50px 20px 30px;
     color: rgba(0, 0, 0, 0.541327);
 
 }
