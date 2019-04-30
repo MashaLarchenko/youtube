@@ -24,12 +24,12 @@ body {
 }
 
 .menu-wrapper {
+    position: relative;
+    height: 50px;
     grid-row: 1;
     background-color: white;
-    position: relative;
-    top: 10px;
     color: #000;
-    height: 40px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
 }
 
 #palette-menu {
@@ -78,12 +78,12 @@ label {
 }
 
 a {
-    display: block;
-    /* / width: 100%; */
+    display: inline-block;
     padding: 10px;
     color: #000;
     text-decoration: none;
     border-top: 1px solid rgba(255, 255, 255, .3);
+    font-size: 13px;
 }
 
 a:hover {
@@ -93,8 +93,8 @@ a:hover {
 
 #palette-menu:checked~.menu {
     max-height: 200px;
-    width: 200px;
-    font-size: 14px;
+    width: 500px;
+    border: 1px solid #000;
 }
 
 .main {
@@ -160,7 +160,7 @@ button {
 }
 
 .color-item {
-    padding: 20px 50px 20px 30px;
+    padding: 20px 70px 20px 38px;
     color: rgba(0, 0, 0, 0.541327);
 }
 
