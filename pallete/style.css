@@ -17,16 +17,15 @@
 
 body {
     display: grid;
-    grid-template-rows: 170px 1fr ;
- 
+    position: relative;
+    z-index: 2;
+    grid-template-rows: 170px 1fr;
     font-family: 'Roboto', sans-serif;
 }
 
-
-
-.menu-wrapper{
+.menu-wrapper {
     grid-row: 1;
-    background-color:white;
+    background-color: white;
     position: relative;
     top: 10px;
     color: #000;
@@ -47,7 +46,7 @@ label {
     font-size: 20px;
 }
 
-.menu__icon-line{
+.menu__icon-line {
     position: absolute;
     top: 15px;
     width: 18px;
@@ -61,13 +60,11 @@ label {
     top: 21px;
 }
 
-.bottom { 
+.bottom {
     top: 27px;
 }
 
-
-
-.menu{
+.menu {
     display: block;
     position: absolute;
     width: 100%;
@@ -82,19 +79,19 @@ label {
 
 a {
     display: block;
-   /* / width: 100%; */
+    /* / width: 100%; */
     padding: 10px;
     color: #000;
     text-decoration: none;
-    border-top: 1px solid rgba(255,255,255,.3);
+    border-top: 1px solid rgba(255, 255, 255, .3);
 }
 
-a:hover{
-    color:#fff;
-    background-color: rgba(0,0,0,.9);
+a:hover {
+    color: #fff;
+    background-color: rgba(0, 0, 0, .9);
 }
 
-#palette-menu:checked ~ .menu{
+#palette-menu:checked~.menu {
     max-height: 200px;
     width: 200px;
     font-size: 14px;
@@ -103,10 +100,9 @@ a:hover{
 .main {
     display: grid;
     grid-row: 2;
-    grid-template-columns: 100px 1fr 2fr 2fr ;
-    grid-template-rows: 1fr 1fr  50px; 
-    grid-template-areas:  ". palette . canvas" 
-                         ". colorcont . canvas"; 
+    grid-template-columns: 100px 1fr 2fr 2fr;
+    grid-template-rows: 1fr 1fr 50px;
+    grid-template-areas: ". palette . canvas" ". colorcont . canvas";
 }
 
 [draggable] {
@@ -116,13 +112,10 @@ a:hover{
     user-select: none;
 }
 
-
 button {
     background-color: #fff;
     color: rgba(0, 0, 0, 0.541327);
-
 }
-
 
 .pallete {
     grid-row: 2;
@@ -149,16 +142,14 @@ button {
 }
 
 .tool-item:nth-child(2) {
-    border-bottom: 1px solid  rgba(0, 0, 0, 0.12);
-    }
-    
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
 
 .color {
-    grid-row:3;
+    grid-row: 3;
     grid-column: 2;
     grid-area: colorcont;
 }
-
 
 .color-container {
     display: grid;
@@ -171,10 +162,7 @@ button {
 .color-item {
     padding: 20px 50px 20px 30px;
     color: rgba(0, 0, 0, 0.541327);
-
 }
-
-
 
 .color-item .blue-color {
     background-color: #41B6F7;
@@ -192,7 +180,6 @@ button {
     background-color: #C4C4C4;
 }
 
-
 .color-item>div {
     display: inline-block;
     width: 20px;
@@ -203,14 +190,14 @@ button {
 }
 
 .color-item:nth-child(2) {
-border-bottom: 1px solid  rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .canvas {
     grid-row: 2/4;
     grid-column: 3/5;
     grid-area: canvas;
-    padding-right: 100px; 
+    padding-right: 100px;
 }
 
 .canvas .figure-wrapper {
@@ -221,9 +208,6 @@ border-bottom: 1px solid  rgba(0, 0, 0, 0.12);
 }
 
 .figure-wrapper .figure-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: rgba(0, 0, 0, 0.2);
 }
 
