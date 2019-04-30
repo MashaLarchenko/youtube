@@ -22,8 +22,82 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.menu-wrapper {
+
+
+.menu-wrapper{
     grid-row: 1;
+    background-color:white;
+    position: relative;
+    top: 10px;
+    color: #000;
+    height: 40px;
+}
+
+#palette-menu {
+    display: none;
+}
+
+label {
+    position: relative;
+    top: 0;
+    left: 50px;
+    cursor: pointer;
+    z-index: 2;
+    line-height: 40px;
+    font-size: 20px;
+}
+
+.menu__icon-line{
+    position: absolute;
+    top: 15px;
+    width: 18px;
+    height: 2px;
+    margin-left: 10px;
+    background: rgba(0, 0, 0, 0.54);
+    transition: .5s all;
+}
+
+.middle {
+    top: 21px;
+}
+
+.bottom { 
+    top: 27px;
+}
+
+
+
+.menu{
+    display: block;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%);
+    max-height: 0;
+    font-size: 0;
+    overflow: hidden;
+    transition: .5s all;
+}
+
+a {
+    display: block;
+   /* / width: 100%; */
+    padding: 10px;
+    color: #000;
+    text-decoration: none;
+    border-top: 1px solid rgba(255,255,255,.3);
+}
+
+a:hover{
+    color:#fff;
+    background-color: rgba(0,0,0,.9);
+}
+
+#palette-menu:checked ~ .menu{
+    max-height: 200px;
+    width: 200px;
+    font-size: 14px;
 }
 
 .main {
@@ -34,6 +108,14 @@ body {
     grid-template-areas:  ". palette . canvas" 
                          ". colorcont . canvas"; 
 }
+
+[draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 
 button {
     background-color: #fff;
