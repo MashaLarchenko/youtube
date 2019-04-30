@@ -56,6 +56,17 @@ label {
     transition: .5s all;
 }
 
+.menu__dots {
+    position: absolute;
+    top: 15px;
+    left: 98%;
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    margin-left: 10px;
+    background-color: rgba(0, 0, 0, 0.54);
+}
+
 .middle {
     top: 21px;
 }
