@@ -1,0 +1,33 @@
+.search-box {
+    position: relative;
+    left: 25%;
+    top:18px;
+    width: 50%;
+    height: 25px;
+    padding-left: 3%;
+    border: 1px solid grey;
+    border-radius: 12px;
+    background-color: lightgrey;
+}
+
+
+.search-icon {
+    position: relative;
+    right: 27%;
+    top: 20px;
+
+}
+
+
+button {
+  position: relative;
+  right: 27%;
+  top: 24px;
+  border: none;
+  width: 22px;
+  height: 24px;
+  background-image: url(/src/assets/search.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+}
