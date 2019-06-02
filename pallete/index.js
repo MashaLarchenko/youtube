@@ -8,10 +8,7 @@ const tools = document.querySelector('.tools-container');
 
 const figureElem = document.querySelector('.figure-wrapper');
 
-const dragEl = document.querySelector('.figure-item');
-
 const customColor = document.getElementById('customColor');
-
 
 const state = {
   currentTool: '',
@@ -40,13 +37,6 @@ function changeShape(event) {
 }
 
 
-function moveCoord(e) {
-  e.target.style.left = `${e.pageX - e.target.offsetWidth / 2}px`;
-  e.target.style.top = `${e.pageY - e.target.offsetHeight / 2}px`;
-  e.target.style.zIndex = 50;
-}
-
-
 function getCode(e) {
   keycode.code = e.keyCode;
   if (keycode.code !== e.keyCode) {
@@ -54,29 +44,23 @@ function getCode(e) {
   }
 }
 
+
 document.addEventListener('keydown', getCode);
 
+let offsetXval;
+let offsetYval;
 
-figureElem.addEventListener('mousedown', (e) => {
+figureElem.addEventListener('dragstart', (e) => {
+  offsetXval = e.offsetX;
+  offsetYval = e.offsetY;
+});
+
+
+figureElem.addEventListener('dragend', (e) => {
   if (state.currentTool === 'move' || keycode.code === 77) {
     e.target.style.position = 'absolute';
-    moveCoord(e);
-    document.body.appendChild(dragEl);
-    e.target.style.zIndex = 20;
-
-    document.onmousemove = function (evt) {
-      moveCoord(evt);
-    };
-
-    figureElem.onmouseup = function () {
-      document.onmousemove = null;
-      figureElem.onmouseup = null;
-      figureElem.onkeydown = null;
-    };
-
-    figureElem.ondragstart = function () {
-      return false;
-    };
+    e.target.style.top = `${(e.pageY - offsetYval)}px`;
+    e.target.style.left = `${(e.pageX - offsetXval)}px`;
   }
 });
 
@@ -109,13 +93,13 @@ figureElem.addEventListener('click', (event) => {
 document.addEventListener('click', (event) => {
   if (state.currentTool === 'colorPicker' || keycode.code === 67) {
     keycode.code = '';
-    if (event.target === customColor) {
-      const customValue = document.getElementById('customColor').value;
-      state.currentcolor.style.backgroundColor = customValue;
-    } else {
-      const targetColor = window.getComputedStyle(event.target).backgroundColor;
-      state.previColor.style.backgroundColor = state.currentcolor.style.backgroundColor;
-      state.currentcolor.style.backgroundColor = targetColor;
-    }
+    const targetColor = window.getComputedStyle(event.target).backgroundColor;
+    state.previColor.style.backgroundColor = state.currentcolor.style.backgroundColor;
+    state.currentcolor.style.backgroundColor = targetColor;
   }
+});
+
+customColor.addEventListener('input', () => {
+  const customValue = document.getElementById('customColor').value;
+  state.currentcolor.style.backgroundColor = customValue;
 });
