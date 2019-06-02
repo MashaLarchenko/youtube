@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./src/assets/fonts/fontawesome-free-5.8.1-web/css/all.min.css">
+  <link rel="stylesheet" href="./style.css">
+
+  <title>Palette</title>
+</head>
+<body>
+  <header class="menu-wrapper">
+    <input type="checkbox" id="palette-menu">
+    <label for="palette-menu"> CodeJam - Pallete </label>
+    <div class="menu__icon-line top"></div>
+    <div class="menu__icon-line middle"></div>
+    <div class="menu__icon-line bottom"></div>
+    <nav class="menu">
+     <a href="#"> Paint Bucket (P) </a>
+     <a href="#"> Choose color (C) </a>
+     <a href="#"> Move (M) </a>
+     <a href="#"> Transform (T) </a>
+    </nav>
+    <div class="menu__dots top"></div>
+    <div class="menu__dots middle"></div>
+    <div class="menu__dots bottom"></div>
+  </header>
+  <main class="main">
+    <section class="pallete">
+      <ul class="tools-container">
+        <li class="tool-item" >
+          <button class="paint-bucket">
+            <i class="fas fa-fill-drip paint-bucket" ></i>
+          </button>
+        </li>
+        <li class="tool-item ">
+          <button class="choose-color">
+            <i class="fas fa-eye-dropper choose-color"></i>
+          </button>
+        </li>
+        <li class="tool-item">
+          <button class="move">
+            <i class="fas fa-arrows-alt move"></i>
+          </button>
+        </li>
+        <li class="tool-item">
+          <button class="transform">
+            <i class="fas fa-exchange-alt transform"></i>
+          </button>
+        </li>
+      </ul>
+    </section>
+    <section class="frames">
+      <div  class="frame">
+        <canvas class="frame_canvas canvas" width="200px" height="200px"></canvas>
+        <button class="delete-button">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div>
+    </section>
+     <button class="addFrames"> + Add new frames </button>
+    <canvas class="draw_canvas canvas" width= 600px height="600px"></canvas>
+    <section class="animation">
+      <div>
+        <canvas class="prev canvas" width= 300px height="300px"></canvas>
+        <input type="range" name="fps" min ='10' max = '50' id="fps">
+        <label for="fps">  FPS </label>
+
+      </div>
+    </section>
+    <!-- <section class="canvas">
+      <div class="figure-wrapper">
+        <div class="figure-item square draggable" draggable="true"></div>
+        <div class="figure-item square draggable" draggable="true"></div>
+        <div class="figure-item square draggable" draggable="true"></div>
+        <div class="figure-item square draggable" draggable="true"></div>
+        <div class="figure-item square draggable" draggable="true"></div>
+        <div class="figure-item square draggable" draggable="true"></div>
+        <div class="figure-item circle draggable" draggable="true"></div>
+        <div class="figure-item square draggable" draggable="true"></div>
+        <div class="figure-item square draggable" draggable="true"></div>
+      </div>
+    </section> -->
+  </main>
+  <script src="./frame.js"></script>
+  <script src="./canvas.js"></script>
+
+</body>
+</html>
