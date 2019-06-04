@@ -251,19 +251,28 @@ button {
 
 .delete-button {
 position: relative;
-bottom: 80%;
-left: 75%;
+bottom: 85%;
+left: 80%;
+}
+
+.duplicate-button {
+  position: relative;
+  bottom: 25%;
+  left: 70%;
 }
 
 .addFrames {
-  width: 100px;
+  border: 1px solid lightgray;
+  box-shadow: #000;
+  width: 200px;
   height: 100px;
   grid-area: addButton;
 }
 
-.canvas {
-  background: url(./src/assets/images/background-canvas.jpg);
 
+.canvas {
+  background-color: lightgrey;
+  border: 2px solid black;
 }
 
 .draw_canvas {
@@ -271,6 +280,7 @@ left: 75%;
   grid-area: draw;
   width: 600px;
   height: 600px;
+  background: url(./src/assets/images/background-canvas.jpg);
 }
 
 .frame_canvas  {
@@ -286,6 +296,10 @@ left: 75%;
 .prev {
   width: 300px;
   height: 300px;
+}
+
+.fas {
+  font-size: 25px;
 }
 
 
