@@ -4,15 +4,15 @@
 export default class SearchView {
   static render() {
     const searchWrap = document.createElement('div');
-    this.searchBox = document.createElement('input');
-    this.searchButton = document.createElement('button');
-    // const searchButton = document.createElement('button');
-    this.searchBox.setAttribute('type', 'text');
-    this.searchBox.setAttribute('name', 'searchText');
-    this.searchBox.classList.add('search-box');
-    document.body.appendChild(this.searchBox);
+    const searchBox = document.createElement('input');
+    const searchButton = document.createElement('button');
+    searchButton.innerText = 'Search';
+    searchBox.setAttribute('type', 'text');
+    searchBox.setAttribute('name', 'searchText');
+    searchBox.classList.add('search-box');
+    document.body.appendChild(searchBox);
     document.body.appendChild(searchWrap);
-    searchWrap.appendChild(this.searchBox);
-    searchWrap.appendChild(this.searchButton);
+    searchWrap.appendChild(searchBox);
+    searchWrap.appendChild(searchButton);
   }
 }

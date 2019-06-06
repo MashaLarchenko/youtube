@@ -4,20 +4,19 @@ import AppView from '../views/AppView/AppView';
 
 export default class AppModel {
   constructor(state) {
-    this.state = state;
+    this.url = state;
+    this.id = state;
     this.search = new SearchView();
     this.data = '';
   }
 
 
-  static extractClipNames(data) {
-    // console.log(data);
-    // const ob = {
-    //   title: data.items.map(clip => clip.snippet.title),
-    //   description: data.items.map(clip => clip.snippet.description),
-    //   published: data.items.map(clip => clip.snippet.publishedAt),
-    // };
-    return data.items.map(clip => clip.snippet);
+  static extractClipItems(data) {
+    return data.items;
+  }
+
+  static exstractClipId(data) {
+    return data.items.map(clip => clip.id.videoId);
   }
 
 
@@ -26,80 +25,37 @@ export default class AppModel {
     return responce;
   }
 
-  // async getjSON(resp) {
-  //   const dataR = await resp.json();
-  //   console.log(dataR);
-  //   return AppModel.extractClipNames(dataR);
-  // }
+  static async searchById(url, id) {
+    const res = await fetch(`${url}&id=${id}`);
+    const data = await res.json();
+    return data;
+  }
+
 
   async getClipName() {
     const box = document.querySelector('input');
     const button = document.querySelector('button');
-    // const cardContainer = document.createElement('section');
-    // cardContainer.classList.add('card-container');
-    // document.body.appendChild(cardContainer);
-
     let value = '';
-    const { url } = this.state;
+    const { url } = this.url;
+    const { id } = this.id;
 
     button.addEventListener('click', async () => {
-      // SearchView.render();
-      // const content = document.createElement('ul');
-      // document.body.appendChild(content);
-      // const node = document.createElement('li');
-      const conte = document.querySelector('.card-container');
+      const content = document.querySelector('.card-container');
       value = box.value;
       const resp = await AppModel.searchBy(url, box.value);
       const data = await resp.json();
-      const d = await AppModel.extractClipNames(data);
-      console.log(d);
-      const v = new AppView(d);
-      v.render();
-      // const textnode = document.createTextNode(value);
-      // node.appendChild(textnode);
-      // content.appendChild(node);
-      // console.log(value);
-      while (conte.firstChild) {
-        conte.removeChild(conte.firstChild);
+      const videoId = await AppModel.exstractClipId(data);
+      const idResult = await AppModel.searchById(id, videoId);
+      const clipInfo = await AppModel.extractClipItems(idResult);
+      const clip = new AppView(clipInfo);
+      clip.render();
+
+      while (content.firstChild) {
+        content.removeChild(content.firstChild);
       }
-      document.body.removeChild(conte);
+
+      const { body } = document;
+      if (body.contains(content)) document.body.removeChild(content);
     });
   }
 }
-
-//   async getClipName() {
-//     const box = document.querySelector('input');
-//     const button = document.querySelector('button');
-
-//     console.log(button);
-//     console.log(box);
-//     let value = '';
-//     const { url } = this.state;
-//     // let responce = '';
-
-//     button.addEventListener('click', async () => {
-//       const content = document.createElement('ul');
-//       document.body.appendChild(content);
-//       const node = document.createElement('li');
-//       value = box.value;
-//       const resp = await AppModel.searchBy(url, box.value);
-//       const textnode = document.createTextNode(value);
-//       node.appendChild(textnode);
-//       content.appendChild(node);
-//       console.log(value);
-//     });
-
-//   }
-
-//   async getjSON (resp){
-//
-//     // eslint-disable-next-line no-console
-//     console.log(dataR);
-//     return AppModel.extractClipNames(dataR);
-//   }
-//   static async searchBy(url, req) {
-//     consonce = await fetch(`${url}&q=${req}`);
-//     console.log(responce);
-//     return responce;
-//   }
-// }
