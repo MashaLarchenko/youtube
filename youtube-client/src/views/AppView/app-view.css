@@ -31,3 +31,16 @@ button {
   background-size: 100%;
 
 }
+
+.card-elem {
+   width: 300px;
+   height: 350px;
+   border: 2px solid black;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 90%;
+  overflow: hidden;
+}
