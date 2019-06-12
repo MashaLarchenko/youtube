@@ -13,6 +13,6 @@ export default class App {
   async start() {
     SearchView.render();
     const model = new AppModel(this.state);
-    const data = await model.getClipName();
+    const data = await model.getClip();
   }
 }

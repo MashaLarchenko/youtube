@@ -4,14 +4,17 @@ export default class AppView {
   constructor(data) {
     this.data = data;
   }
-  
+
   render() {
     const cardContainer = document.createElement('section');
+    const cardWrapper = document.createElement('div');
+    cardWrapper.classList.add('card-wrapper');
     cardContainer.classList.add('card-container');
     document.body.appendChild(cardContainer);
+    cardContainer.appendChild(cardWrapper);
 
     const list = this.renderClip(this.data);
-    cardContainer.innerHTML = list;
+    cardWrapper.innerHTML = list;
   }
 
   renderClip() {

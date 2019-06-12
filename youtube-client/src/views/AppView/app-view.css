@@ -40,6 +40,7 @@ button {
 }
 
 .card-elem {
+  /* position: absolute; */
   width: 385px;
   height: 650px;
   border: 2px solid red;
@@ -47,23 +48,35 @@ button {
   -webkit-box-shadow: 45px 15px 35px -30px  rgba(217,80,80,1);
   -moz-box-shadow: 45px 15px 35px -30px rgba(217,80,80,1);
   box-shadow: 45px 15px 35px -30px rgba(217,80,80,1);
+
+}
+.card-elem:hover{
+  background-color: red;
 }
 
 .card-info {
+  height: 320px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   font-size: 18px;
   font-weight: 600;
-  padding: 30px 35px;
+  padding: 0 35px;
 }
 
 
 .card-container {
-  position: relative;
-  left: 20px;
-  top: 100px;
-  display: grid;
-  grid-template-columns: repeat(15, 1fr);
+  grid-row:2;
   overflow: hidden;
-  grid-column-gap: 90px;
+}
+
+.card-wrapper {
+  position: relative;
+  /* left: 20px;
+  top: 100px; */
+  display: grid;
+  grid-template-columns: repeat(15, minmax(378px,479px));
+  /* overflow: hidden; */
+  grid-column-gap: 85px;
 
 }
 
@@ -88,8 +101,21 @@ button {
   color: violet;
 }
 
+body {
+  display: grid;
+  grid-template-rows: minmax(70px, 100px) 4fr minmax(70px, 100px);
+}
+
 .card-description {
   font-weight: normal;
   font-size: 16px;
   padding-top: 20px;
 }
+
+.button-container{
+  grid-row: 3;
+  position: relative;
+  top:150px;
+  justify-self: center;
+}
+

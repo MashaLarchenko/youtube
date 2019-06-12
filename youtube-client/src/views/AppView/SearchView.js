@@ -7,6 +7,7 @@ export default class SearchView {
     const searchBox = document.createElement('input');
     const searchButton = document.createElement('button');
     searchButton.innerText = 'Search';
+    searchButton.classList.add('search-button');
     searchBox.setAttribute('type', 'text');
     searchBox.setAttribute('name', 'searchText');
     searchBox.classList.add('search-box');
