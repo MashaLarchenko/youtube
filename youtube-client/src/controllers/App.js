@@ -6,7 +6,7 @@ export default class App {
     this.search = new SearchView();
     this.state = {
       url: 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyApVW9-OFfLCgxS70keWhMQ1iLmhwOttII&type=video&part=snippet&maxResults=15',
-      id: 'https://www.googleapis.com/youtube/v3/videos?key=AIzaSyApVW9-OFfLCgxS70keWhMQ1iLmhwOttII&part=snippet,statistics',
+      statisticUrl: 'https://www.googleapis.com/youtube/v3/videos?key=AIzaSyApVW9-OFfLCgxS70keWhMQ1iLmhwOttII&part=snippet,statistics',
     };
   }
 

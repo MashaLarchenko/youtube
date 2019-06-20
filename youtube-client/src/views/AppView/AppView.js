@@ -23,4 +23,13 @@ export default class AppView {
       return `${cardEl.render()}`;
     }).join('');
   }
+
+  renderNextPage() {
+    const nextlist = this.renderClip(this.data);
+    console.log(nextlist);
+    const cardWrapper = document.querySelector('.card-wrapper');
+    console.log(cardWrapper);
+    cardWrapper.innerHTML += nextlist;
+    console.log(cardWrapper);
+  }
 }
