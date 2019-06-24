@@ -52,11 +52,11 @@ export default class AppModel {
     let position = pos;
     let isDown = false;
     let start;
+    let scrollLeft;
     card.addEventListener('mousedown', (e) => {
       isDown = true;
-      start = e.pageX - card.offsetLeft;
-      scroll
-      console.log(start);
+      start = e.pageX;
+
     });
     card.addEventListener('mouseleave', () => {
       isDown = false;
@@ -68,7 +68,7 @@ export default class AppModel {
       if (!isDown) return;
       e.preventDefault();
       if (start < e.pageX) {
-        position = `${+position + (width * 4) + 360}`;
+        position = `${+position + (width * 4) + 105}`;
         if (position > 0) {
           card.style.left = '0px';
           position = 0;
@@ -76,7 +76,7 @@ export default class AppModel {
           card.style.left = `${position}px`;
         }
       } else {
-        position = `${+position - (width * 4) - 360}`;
+        position = `${+position - (width * 4) - 105}`;
         card.style.left = `${position}px`;
       }
     });
@@ -105,9 +105,7 @@ export default class AppModel {
     const cardElem = document.querySelector('.card-elem');
     const cardWidth = window.getComputedStyle(cardElem).getPropertyValue('width');
     const width = cardWidth.slice(0, cardWidth.indexOf('p'));
-    console.log(width);
     const currentPos = window.getComputedStyle(card).getPropertyValue('left');
-    console.log(currentPos);
     let pos = currentPos.slice(0, currentPos.indexOf('p'));
     AppModel.swipeSlide(card, pos, width);
 
@@ -121,20 +119,19 @@ export default class AppModel {
         const nextData = await this.nextPage(data, url, value);
         const nextClip = new AppView(nextData);
         nextClip.renderNextPage();
-        console.log(nextClip);
       } else {
-        pos = `${+pos - (width * 4) - 360}`;
-        console.log(pos);
+        pos = `${+pos - (width * 4) - 105}`;
         card.style.left = `${pos}px`;
       }
     });
 
     prevButton.addEventListener('click', () => {
       count--;
+      if (count < 0) {
+        count = 0;
+      }
       currentPage.innerHTML = count;
-      console.log(pos);
-      pos = `${+pos + (width * 4) + 360}`;
-      console.log(pos);
+      pos = `${+pos + (width * 4) + 105}`;
       if (pos > 0) {
         card.style.left = '0px';
         pos = 0;
@@ -150,8 +147,6 @@ export default class AppModel {
       document.body.removeChild(buttonContainer);
     }
   }
-
-
 
   async getClip() {
     const box = document.querySelector('input');

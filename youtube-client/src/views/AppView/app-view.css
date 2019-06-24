@@ -73,6 +73,7 @@ button {
 
 .card-wrapper {
   position: relative;
+  left: 0px;
   display: flex;
   max-height: 500px;
   transition:  0.6s ease;
