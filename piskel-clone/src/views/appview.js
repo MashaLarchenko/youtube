@@ -12,6 +12,7 @@ export default class View {
     View.renderTools();
     View.renderFrames();
     View.renderPreview();
+    View.colorPicker();
   }
 
   static renderTools() {
@@ -20,7 +21,7 @@ export default class View {
     main.classList.add('main');
     const toolsSection = document.createElement('section');
     toolsSection.classList.add('tools');
-    const tool = '<ul class="tools-container"><li class="tool-item" ><button class="paint-bucket"><i class="fas fa-fill-drip paint-bucket" ></i></button></li><li class="tool-item "><button class="choose-color"><i class="fas fa-eye-dropper choose-color"></i></button></li><li class="tool-item"><button class="move"><i class="fas fa-arrows-alt move"></i></button></li><li class="tool-item"><button class="transform"><i class="fas fa-exchange-alt transform"></i></button></li></ul>';
+    const tool = '<ul class="tools-container"><li class="tool-item" ><button class="pen"><i class="fas fa-pencil-alt pen"></i></button></li><li class="tool-item" ><button class="paint-bucket"><i class="fas fa-fill-drip paint-bucket" ></i></button></li><li class="tool-item "><button class="choose-color"><i class="fas fa-eye-dropper choose-color"></i></button></li><li class="tool-item"><button class="move"><i class="fas fa-arrows-alt move"></i></button></li><li class="tool-item"><button class="transform"><i class="fas fa-exchange-alt transform"></i></button></li></ul>';
     toolsSection.innerHTML += tool;
     document.body.appendChild(main);
     main.appendChild(toolsSection);
@@ -33,8 +34,8 @@ export default class View {
     const deleteButton = '<button class="delete-button"><i class="fas fa-trash-alt"></i></button>';
     const duplicateButton = '<button class="duplicate-button"><i class="fas fa-copy"></i></button>';
     const addButton = '<button class="addFrames"> + Add new frames </button>';
-    const frame = `<div class="frame"><canvas class="frame_canvas canvas" width="200px" height="200px"></canvas>${deleteButton}${duplicateButton}</div>`;
-    const drawCanvas = '<canvas class="draw_canvas canvas" width= 600px height="600px"></canvas>';
+    const frame = `<div class="frame"><canvas class="frame_canvas canvas" width="120px" height="120px"></canvas>${deleteButton}${duplicateButton}</div>`;
+    const drawCanvas = '<section class="draw_container"><canvas class="draw_canvas canvas" width= 600px height="600px"></canvas></section>';
     framesContainer.innerHTML += frame;
     main.appendChild(framesContainer);
     main.innerHTML += addButton;
@@ -48,5 +49,14 @@ export default class View {
     const animationContainer = '<div><canvas class="prev canvas" width = "300px" height="300px"></canvas><input type="range" name="fps" min ="10" max ="50" id="fps"><label for="fps">FPS</label></div>';
     preview.innerHTML += animationContainer;
     main.appendChild(preview);
+  }
+
+  static colorPicker() {
+    const colorContainer = document.createElement('section');
+    colorContainer.classList.add('color_container');
+    const main = document.querySelector('main');
+    const colors = '<input type="color" class="firstColor"><input type="color" class="secondColor">';
+    colorContainer.innerHTML += colors;
+    main.appendChild(colorContainer);
   }
 }

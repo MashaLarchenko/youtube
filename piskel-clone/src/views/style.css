@@ -13,7 +13,7 @@
     display: grid;
     position: relative;
     z-index: 2;
-    grid-template-rows: 170px 1fr;
+    grid-template-rows: 50px 1fr;
     font-family: 'Roboto', sans-serif;
   }
 
@@ -114,9 +114,9 @@
   .main {
     display: grid;
     grid-row: 2;
-    grid-template-columns: 1fr 1fr 3fr 2fr;
-    grid-template-rows: 1fr 1fr 50px;
-    grid-template-areas: "palette  frames draw animation" ". addButton draw animation";
+    grid-template-columns: 1fr minmax(150px, 1fr) 12fr 2fr;
+    grid-template-areas: "palette  frames draw animation" ". . draw animation";
+    background-color: rgb(31, 29, 29);
   }
   
   [draggable] {
@@ -127,8 +127,9 @@
   }
   
   button {
-    background-color: #fff;
-    color: rgba(0, 0, 0, 0.541327);
+    background-color: rgb(68,68,68);
+    width: 40px;
+    height: 40px;
   }
   
   .tools {
@@ -143,16 +144,18 @@
     width: max-content;
     justify-content: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+    background-color: rgb(68,68,68);
   }
   
   .tool-item .fas {
-    padding-right: 20px;
     font-size: 18px;
-    color: rgba(0, 0, 0, 0.5413);
+    color: white;
+    background-color: rgb(68,68,68);
   }
   
   .tool-item {
-    padding: 20px;
+    border: 3px solid black;
+    /* padding: 15px; */
   }
   
   .tool-item:nth-child(2) {
@@ -226,6 +229,12 @@
     height: 236px;
     border-radius: 100%;
   }
+
+  .color_container {
+    grid-column: 1;
+    position: relative;
+    bottom: 400%;
+  }
   
   .frames {
     overflow-y: scroll;
@@ -237,16 +246,21 @@
   
   .frame{
     position: relative;
-    width: 200px;
+    /* width: 200px;
     height: 200px;
-    margin-bottom: 10px;
+    margin-bottom: 10px; */
     grid-area: frames;
   }
   
   .delete-button {
+  visibility: hidden;
   position: relative;
-  bottom: 85%;
-  left: 80%;
+  bottom: 8%;
+  right: 15%;
+  }
+
+  .delete-button:hover{
+      visibility: visible;
   }
   
   .duplicate-button {
@@ -256,10 +270,14 @@
   }
   
   .addFrames {
+    position: relative;
+    bottom: 200%;
+    grid-column: 2;
+    font-size: 14px;
     border: 1px solid lightgray;
     box-shadow: #000;
-    width: 200px;
-    height: 100px;
+    width: 95px;
+    height: 68px;
     grid-area: addButton;
   }
   
@@ -268,18 +286,22 @@
     background-color: lightgrey;
     border: 2px solid black;
   }
+
+  .draw_container {
+    background-color: rgb(160,160,160);
+  }
   
   .draw_canvas {
     justify-self: center;
     grid-area: draw;
     width: 600px;
     height: 600px;
-    /* background: url(./src/assets/images/background-canvas.jpg); */
+    
   }
   
   .frame_canvas  {
-    width: 200px;
-    height: 200px;
+    width: 120px;
+    height: 120px;
     border: 2px solid lightgray;
   }
   
@@ -293,5 +315,5 @@
   }
   
   .fas {
-    font-size: 25px;
+    font-size: 20px;
   }
