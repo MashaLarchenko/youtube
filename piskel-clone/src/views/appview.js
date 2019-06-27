@@ -20,11 +20,20 @@ export default class View {
     const main = document.createElement('main');
     main.classList.add('main');
     const toolsSection = document.createElement('section');
+    const canvasSize = document.createElement('div');
+    // const toolSize = document.createElement('div');
+    // toolSize.classList.add('tool-size_container');
+    const toolSize = '<div class="tool-size_container"><div class="size-item size-one"></div><div class="size-item size-two"></div><div class="size-item size-three"></div><div class="size-item size-four"></div> '
+    canvasSize.classList.add('size_wrapper');
+    const sizeContainer = '<p class="size_label">Canvas size</p><select class="size_contaner"><option class="size_32">32X32</option><option class="size_64">64X64</option><option class="size_128">128X128</option></select>';
     toolsSection.classList.add('tools');
-    const tool = '<ul class="tools-container"><li class="tool-item" ><button class="pen"><i class="fas fa-pencil-alt pen"></i></button></li><li class="tool-item" ><button class="paint-bucket"><i class="fas fa-fill-drip paint-bucket" ></i></button></li><li class="tool-item "><button class="choose-color"><i class="fas fa-eye-dropper choose-color"></i></button></li><li class="tool-item"><button class="move"><i class="fas fa-arrows-alt move"></i></button></li><li class="tool-item"><button class="transform"><i class="fas fa-exchange-alt transform"></i></button></li></ul>';
+    const tool = '<ul class="tools-container"><li class="tool-item" ><button class="pen"><i class="fas fa-pencil-alt pen"></i></button></li><li class="tool-item" ><button class="paint-bucket"><i class="fas fa-fill-drip paint-bucket" ></i></button></li><li class="tool-item "><button class="choose-color"><i class="fas fa-eye-dropper choose-color"></i></button></li><li class="tool-item"><button class="move"><i class="fas fa-arrows-alt move"></i></button></li><li class="tool-item"><button class="transform"><i class="fas fa-exchange-alt transform"></i></button></li><li class="tool-item"><button class="eraster"><i class="fas fa-eraser eraster"></i></button></li></ul>';
     toolsSection.innerHTML += tool;
+    canvasSize.innerHTML += sizeContainer;
+    main.innerHTML += toolSize;
     document.body.appendChild(main);
     main.appendChild(toolsSection);
+    main.appendChild(canvasSize);
   }
 
   static renderFrames() {
@@ -35,7 +44,7 @@ export default class View {
     const duplicateButton = '<button class="duplicate-button"><i class="fas fa-copy"></i></button>';
     const addButton = '<button class="addFrames"> + Add new frames </button>';
     const frame = `<div class="frame"><canvas class="frame_canvas canvas" width="120px" height="120px"></canvas>${deleteButton}${duplicateButton}</div>`;
-    const drawCanvas = '<section class="draw_container"><canvas class="draw_canvas canvas" width= 600px height="600px"></canvas></section>';
+    const drawCanvas = '<section class="draw_container"><canvas class="draw_canvas canvas" width= 800px height="800px"></canvas></section>';
     framesContainer.innerHTML += frame;
     main.appendChild(framesContainer);
     main.innerHTML += addButton;

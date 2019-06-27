@@ -3,24 +3,38 @@ export default class Tools {
     const primaryColor = document.querySelector('.firstColor');
     const secondaryColor = document.querySelector('.secondColor');
     const tools = document.querySelector('.tools');
-    console.log(tools);
+    const size = document.querySelector('.size_contaner');
+    const toolSize = document.querySelector('.tool-size_container');
+    console.log(size.value);
     const canvas = document.querySelector('.draw_canvas');
 
     const frc = document.querySelector('.frame_canvas');
-    console.log(frc);
     const c = frc.getContext('2d');
     const ctx = canvas.getContext('2d');
     const state = {
       currentTool: '',
       currentcolor: primaryColor.value,
       previColor: secondaryColor.value,
+      canvasSize: 32,
+      penSize: 1,
     };
+    console.log(state.canvasSize);
+
     const draw = (ev) => {
-      const x = ev.offsetX;
-      const y = ev.offsetY;
+      const unitSize = canvas.width / state.canvasSize;
+      const x = Math.ceil(ev.offsetX / unitSize) * unitSize;
+      const y = Math.ceil(ev.offsetY / unitSize) * unitSize;
       ctx.fillStyle = state.currentcolor;
-      ctx.fillRect(x - 5, y - 5, 10, 10);
+      ctx.fillRect(x - unitSize, y - unitSize, unitSize * state.penSize, unitSize * state.penSize);
       ctx.fill();
+      console.log(unitSize);
+    };
+
+    const clear = (ev) => {
+      const unitSize = canvas.width / state.canvasSize;
+      const x = Math.ceil(ev.offsetX / unitSize) * unitSize;
+      const y = Math.ceil(ev.offsetY / unitSize) * unitSize;
+      ctx.clearRect(x - unitSize, y - unitSize, unitSize * state.penSize, unitSize * state.penSize);
     };
 
     const keycode = {
@@ -38,6 +52,9 @@ export default class Tools {
         state.currentTool = 'transform';
       } else if (event.target.classList.contains('pen')) {
         state.currentTool = 'pen';
+        console.log(event.target);
+      } else if (event.target.classList.contains('eraster')) {
+        state.currentTool = 'eraster';
         console.log(event.target);
       } else {
         state.currentTool = '';
@@ -66,8 +83,22 @@ export default class Tools {
       state.currentcolor = primaryColor.value;
     });
 
+    size.addEventListener('input', () => {
+      const { value } = size;
+      const sizeValue = value.slice(0, value.indexOf('X'));
+      //   if (state.canvasSize !== sizeValue) {
+      //     if (state.canvasSize < sizeValue) {
+      //       ctx.scal(2, 0, 0, 2, 0, 0);
+      //       ctx.fill();
+      //     }
+      //   }
+      state.canvasSize = sizeValue;
+    });
+
+
     canvas.addEventListener('mousedown', (e) => {
       if (state.currentTool === 'pen') {
+        canvas.addEventListener('click', draw);
         // console.log(state.currentTool);
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseup', (e) => {
@@ -81,6 +112,26 @@ export default class Tools {
           //   });
           canvas.removeEventListener('mousemove', draw);
         });
+      } else if (state.currentTool === 'eraster') {
+        console.log(state.currentTool);
+
+        canvas.addEventListener('mousemove', clear);
+        canvas.addEventListener('mouseup', () => {
+          canvas.removeEventListener('mousemove', clear);
+        });
+      }
+    });
+
+
+    toolSize.addEventListener('click', (e) => {
+      if (e.target.classList.contains('size-one')) {
+        state.penSize = 1;
+      } else if (e.target.classList.contains('size-two')) {
+        state.penSize = 2;
+      } else if (e.target.classList.contains('size-three')) {
+        state.penSize = 3;
+      } else if (e.target.classList.contains('size-four')) {
+        state.penSize = 4;
       }
     });
   }
