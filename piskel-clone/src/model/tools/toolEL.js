@@ -1,5 +1,7 @@
 
 import Frames from '../../frames/frames';
+import Utils from '../utils';
+import PaintBucket from './Backet';
 
 export default class Tools {
   static getColor() {
@@ -73,13 +75,6 @@ export default class Tools {
       }
     });
 
-
-    // canvas.addEventListener('click', () => {
-    //   if (state.currentTool === 'paint-bucket') {
-
-    //   }
-    // });
-
     canvas.addEventListener('click', (event) => {
       if (state.currentTool === 'colorPicker' || keycode.code === 67) {
         keycode.code = '';
@@ -88,18 +83,15 @@ export default class Tools {
         const y = Math.ceil(event.offsetY / unitSize) * unitSize;
         const pixelColorData = ctx.getImageData(x - unitSize, y - unitSize, unitSize, unitSize);
         const { data } = pixelColorData;
-        console.log(pixelColorData);
-        console.log(data);
         const red = data[0];
         const green = data[1];
         const blue = data[2];
-        const hexColor = Tools.fullColorHex(red, green, blue);
-        console.log(red, green, blue);
-        console.log(hexColor);
-        primaryColor.value = `#${hexColor}`;
-        console.log(primaryColor.value);
+        const hexColor = Utils.fullColorHex(red, green, blue);
+        primaryColor.value = hexColor;
+        state.currentcolor = primaryColor.value;
       }
     });
+
     primaryColor.addEventListener('input', () => {
       state.currentcolor = primaryColor.value;
     });
@@ -116,11 +108,12 @@ export default class Tools {
           console.log(img);
           const newW = canvas.width / (sizeValue / state.canvasSize);
           const newH = canvas.height / (sizeValue / state.canvasSize);
-          //   ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0, 400, 400);
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, newW, newH);
         }
       }
       state.canvasSize = sizeValue;
+      console.log(state.canvasSize);
     });
 
 
@@ -138,14 +131,6 @@ export default class Tools {
           cont.drawImage(img, 0, 0, currentFrame.width, currentFrame.height);
         });
         canvas.addEventListener('mouseup', () => {
-        //   currentFrame.addEventListener('click', (e) => {
-        //     const im = canvas.toDataURL('image/png');
-        //     const img = new Image();
-        //     img.src = im;
-
-          //     const cont = e.target.getContext('2d');
-          //     cont.drawImage(img, 0, 0, 200, 200);
-          //   });
           canvas.removeEventListener('mousemove', draw);
           canvas.removeEventListener('click', draw);
         });
@@ -156,6 +141,13 @@ export default class Tools {
         canvas.addEventListener('mouseup', () => {
           canvas.removeEventListener('mousemove', clear);
         });
+      }
+    });
+
+    canvas.addEventListener('click', (event) => {
+      if (state.currentTool === 'paintBucket') {
+        const bucket = new PaintBucket(canvas, ctx, event, state);
+        bucket.fillColor();
       }
     });
 
@@ -173,18 +165,32 @@ export default class Tools {
     });
   }
 
-  static rgbToHex(rgb) {
-    let hex = Number(rgb).toString(16);
-    if (hex.length < 2) {
-      hex = `0${hex}`;
-    }
-    return hex;
-  }
+  //   static rgbToHex(rgb) {
+  //     let hex = Number(rgb).toString(16);
+  //     if (hex.length < 2) {
+  //       hex = `0${hex}`;
+  //     }
+  //     return hex;
+  //   }
 
-  static fullColorHex(r, g, b) {
-    const red = Tools.rgbToHex(r);
-    const green = Tools.rgbToHex(g);
-    const blue = Tools.rgbToHex(b);
-    return `${red}${green}${blue}`;
-  }
+
+  //   static fullColorHex(r, g, b) {
+  //     const red = Tools.rgbToHex(r);
+  //     const green = Tools.rgbToHex(g);
+  //     const blue = Tools.rgbToHex(b);
+  //     return `${red}${green}${blue}`;
+  //   }
+
+  //   static hexToRgb(hex) {
+  //     // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+  //     const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  //     const newHex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
+
+//     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(newHex);
+//     return result ? {
+//       r: parseInt(result[1], 16),
+//       g: parseInt(result[2], 16),
+//       b: parseInt(result[3], 16),
+//     } : null;
+//   }
 }

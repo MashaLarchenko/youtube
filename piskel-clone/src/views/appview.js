@@ -23,7 +23,7 @@ export default class View {
     const canvasSize = document.createElement('div');
     // const toolSize = document.createElement('div');
     // toolSize.classList.add('tool-size_container');
-    const toolSize = '<div class="tool-size_container"><div class="size-item size-one"></div><div class="size-item size-two"></div><div class="size-item size-three"></div><div class="size-item size-four"></div> '
+    const toolSize = '<div class="tool-size_container"><div class="size-item size-one"></div><div class="size-item size-two"></div><div class="size-item size-three"></div><div class="size-item size-four"></div> ';
     canvasSize.classList.add('size_wrapper');
     const sizeContainer = '<p class="size_label">Canvas size</p><select class="size_contaner"><option class="size_32">32X32</option><option class="size_64">64X64</option><option class="size_128">128X128</option></select>';
     toolsSection.classList.add('tools');
