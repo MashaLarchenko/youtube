@@ -1,21 +1,21 @@
 
 import Frames from '../../frames/frames';
-import Utils from '../utils';
 import PaintBucket from './Backet';
+import ColorPicker from './colorPicker';
 
 export default class Tools {
-  static getColor() {
+  static start() {
     const primaryColor = document.querySelector('.firstColor');
     const secondaryColor = document.querySelector('.secondColor');
-    const currentFrame = document.querySelector('.frames');
     const tools = document.querySelector('.tools');
+    const cleanButton = document.querySelector('.clean');
     const size = document.querySelector('.size_contaner');
     const toolSize = document.querySelector('.tool-size_container');
-    console.log(size.value);
     const canvas = document.querySelector('.draw_canvas');
-
-    const framesCanvas = document.querySelectorAll('.frame_canvas');
     const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#e6e6e6';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
     const state = {
       currentTool: '',
       currentcolor: primaryColor.value,
@@ -25,31 +25,34 @@ export default class Tools {
       currentSize: '',
       activeFrame: '',
       activeTool: '',
+      activePenSize: '',
     };
-    console.log(state.canvasSize);
+    const unitSize = canvas.width / state.canvasSize;
 
+    const keycode = {
+      code: '',
+    };
+
+    const getCode = (e) => {
+      keycode.code = e.key;
+      if (keycode.code !== e.key) {
+        keycode.code = '';
+      }
+    };
+    document.addEventListener('keydown', getCode);
     const draw = (ev) => {
-      const unitSize = canvas.width / state.canvasSize;
       const x = Math.ceil(ev.offsetX / unitSize) * unitSize;
       const y = Math.ceil(ev.offsetY / unitSize) * unitSize;
       ctx.fillStyle = state.currentcolor;
       ctx.fillRect(x - unitSize, y - unitSize, unitSize * state.penSize, unitSize * state.penSize);
       ctx.fill();
-      console.log(unitSize);
     };
-
     const clear = (ev) => {
-      const unitSize = canvas.width / state.canvasSize;
       const x = Math.ceil(ev.offsetX / unitSize) * unitSize;
       const y = Math.ceil(ev.offsetY / unitSize) * unitSize;
       ctx.clearRect(x - unitSize, y - unitSize, unitSize * state.penSize, unitSize * state.penSize);
     };
-
-    const keycode = {
-      code: '',
-    };
     tools.addEventListener('click', (event) => {
-      console.log(event.target);
       if (event.target !== state.activeTool && state.activeTool !== '') {
         state.activeTool.classList.remove('active_tool');
       }
@@ -59,7 +62,6 @@ export default class Tools {
       }
       if (event.target.classList.contains('choose-color')) {
         state.currentTool = 'colorPicker';
-        console.log(state.currentTool);
       } else if (event.target.classList.contains('paint-bucket')) {
         state.currentTool = 'paintBucket';
       } else if (event.target.classList.contains('move')) {
@@ -75,20 +77,14 @@ export default class Tools {
       }
     });
 
+    cleanButton.addEventListener('click', () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+
     canvas.addEventListener('click', (event) => {
-      if (state.currentTool === 'colorPicker' || keycode.code === 67) {
-        keycode.code = '';
-        const unitSize = canvas.width / state.canvasSize;
-        const x = Math.ceil(event.offsetX / unitSize) * unitSize;
-        const y = Math.ceil(event.offsetY / unitSize) * unitSize;
-        const pixelColorData = ctx.getImageData(x - unitSize, y - unitSize, unitSize, unitSize);
-        const { data } = pixelColorData;
-        const red = data[0];
-        const green = data[1];
-        const blue = data[2];
-        const hexColor = Utils.fullColorHex(red, green, blue);
-        primaryColor.value = hexColor;
-        state.currentcolor = primaryColor.value;
+      if (state.currentTool === 'colorPicker' || keycode.code === 'c') {
+        const colorPicker = new ColorPicker(event, unitSize, ctx, state, primaryColor);
+        colorPicker.getColor();
       }
     });
 
@@ -96,33 +92,38 @@ export default class Tools {
       state.currentcolor = primaryColor.value;
     });
 
-    size.addEventListener('input', () => {
+    const getSize = () => {
       const { value } = size;
       const sizeValue = value.slice(0, value.indexOf('X'));
       if (state.canvasSize !== sizeValue) {
-        if (state.canvasSize < sizeValue) {
-          const im = canvas.toDataURL('image/png');
-          console.log(im);
+        if (+state.canvasSize < +sizeValue) {
+          const currentImg = canvas.toDataURL('image/png');
           const img = new Image();
-          img.src = im;
-          console.log(img);
+          img.src = currentImg;
           const newW = canvas.width / (sizeValue / state.canvasSize);
           const newH = canvas.height / (sizeValue / state.canvasSize);
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, newW, newH);
+        } else {
+          const currentImg = canvas.toDataURL('image/png');
+          const img = new Image();
+          img.src = currentImg;
+          const newW = canvas.width * (state.canvasSize / sizeValue);
+          const newH = canvas.height * (state.canvasSize / sizeValue);
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           ctx.drawImage(img, 0, 0, newW, newH);
         }
       }
       state.canvasSize = sizeValue;
-      console.log(state.canvasSize);
+    };
+    size.addEventListener('input', () => {
+      getSize();
     });
-
-
     canvas.addEventListener('mousedown', () => {
-      if (state.currentTool === 'pen') {
+      if (state.currentTool === 'pen' || keycode.code === 'p') {
         canvas.addEventListener('click', draw);
-        // console.log(state.currentTool);
         canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mousemove', (e) => {
+        canvas.addEventListener('mousemove', () => {
           const currentFrame = Frames.activeFrame;
           const im = canvas.toDataURL('image/png');
           const img = new Image();
@@ -135,62 +136,39 @@ export default class Tools {
           canvas.removeEventListener('click', draw);
         });
       } else if (state.currentTool === 'eraster') {
-        console.log(state.currentTool);
-
         canvas.addEventListener('mousemove', clear);
         canvas.addEventListener('mouseup', () => {
           canvas.removeEventListener('mousemove', clear);
         });
       }
     });
-
     canvas.addEventListener('click', (event) => {
-      if (state.currentTool === 'paintBucket') {
+      if (state.currentTool === 'paintBucket' || keycode.code === 'b') {
         const bucket = new PaintBucket(canvas, ctx, event, state);
         bucket.fillColor();
       }
     });
-
-
     toolSize.addEventListener('click', (e) => {
+      if (e.target !== state.activePenSize && state.activePenSize !== '') {
+        state.activePenSize.classList.remove('active_tool');
+      }
       if (e.target.classList.contains('size-one')) {
         state.penSize = 1;
+        state.activePenSize = e.target;
+        state.activePenSize.classList.add('active_tool');
       } else if (e.target.classList.contains('size-two')) {
         state.penSize = 2;
+        state.activePenSize = e.target;
+        state.activePenSize.classList.add('active_tool');
       } else if (e.target.classList.contains('size-three')) {
         state.penSize = 3;
+        state.activePenSize = e.target;
+        state.activePenSize.classList.add('active_tool');
       } else if (e.target.classList.contains('size-four')) {
         state.penSize = 4;
+        state.activePenSize = e.target;
+        state.activePenSize.classList.add('active_tool');
       }
     });
   }
-
-  //   static rgbToHex(rgb) {
-  //     let hex = Number(rgb).toString(16);
-  //     if (hex.length < 2) {
-  //       hex = `0${hex}`;
-  //     }
-  //     return hex;
-  //   }
-
-
-  //   static fullColorHex(r, g, b) {
-  //     const red = Tools.rgbToHex(r);
-  //     const green = Tools.rgbToHex(g);
-  //     const blue = Tools.rgbToHex(b);
-  //     return `${red}${green}${blue}`;
-  //   }
-
-  //   static hexToRgb(hex) {
-  //     // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-  //     const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  //     const newHex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
-
-//     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(newHex);
-//     return result ? {
-//       r: parseInt(result[1], 16),
-//       g: parseInt(result[2], 16),
-//       b: parseInt(result[3], 16),
-//     } : null;
-//   }
 }

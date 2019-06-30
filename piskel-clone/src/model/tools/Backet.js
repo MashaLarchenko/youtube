@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable prefer-destructuring */
 import Utils from '../utils';
 
 export default class PaintBucket {
@@ -26,18 +28,20 @@ export default class PaintBucket {
         let pixelPos; let reachLeft;
         let reachRight;
         newPos = pixelStack.pop();
-        let [x, y] = newPos;
-
+        const [x] = newPos;
+        let [y] = newPos;
         pixelPos = (y * this.canvas.width + x) * 4;
-        while (y-- >= 0 && PaintBucket.matchStartColor(pixelPos, colorLayer, startR, startG, startB)) {
+        while (y-- >= 0 && PaintBucket.matchStartColor(pixelPos, colorLayer,
+          startR, startG, startB)) {
           pixelPos -= this.canvas.width * 4;
         }
         pixelPos += this.canvas.width * 4;
         ++y;
         reachLeft = false;
         reachRight = false;
-        while (y++ < this.canvas.height - 1 && PaintBucket.matchStartColor(pixelPos, colorLayer, startR, startG, startB)) {
-            PaintBucket.colorPixel(pixelPos, colorLayer, rgbColor);
+        while (y++ < this.canvas.height - 1 && PaintBucket.matchStartColor(pixelPos, colorLayer,
+          startR, startG, startB)) {
+          PaintBucket.colorPixel(pixelPos, colorLayer, rgbColor);
           if (x > 0) {
             if (PaintBucket.matchStartColor(pixelPos - 4, colorLayer, startR, startG, startB)) {
               if (!reachLeft) {
@@ -48,7 +52,6 @@ export default class PaintBucket {
               reachLeft = false;
             }
           }
-
           if (x < this.canvas.width - 1) {
             if (PaintBucket.matchStartColor(pixelPos + 4, colorLayer, startR, startG, startB)) {
               if (!reachRight) {
@@ -75,11 +78,11 @@ export default class PaintBucket {
     return (r === startR && g === startG && b === startB);
   }
 
-
   static colorPixel(pixelPos, colorLayer, rgbColor) {
-    colorLayer.data[pixelPos] = rgbColor[0];
-    colorLayer.data[pixelPos + 1] = rgbColor[1];
-    colorLayer.data[pixelPos + 2] = rgbColor[2];
-    colorLayer.data[pixelPos + 3] = 255;
+    const layer = colorLayer;
+    layer.data[pixelPos] = rgbColor[0];
+    layer.data[pixelPos + 1] = rgbColor[1];
+    layer.data[pixelPos + 2] = rgbColor[2];
+    layer.data[pixelPos + 3] = 255;
   }
 }
