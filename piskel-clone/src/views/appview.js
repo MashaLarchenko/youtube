@@ -64,7 +64,7 @@ export default class View {
     const preview = document.createElement('section');
     const main = document.querySelector('main');
     preview.classList.add('animation');
-    const animationContainer = '<div><canvas class="preview canvas" width = "300px" height="300px"></canvas><input type="range" name="fps" min ="10" max ="50" id="fps"><label for="fps">FPS</label></div>';
+    const animationContainer = '<div><canvas class="preview canvas" width = "300px" height="300px"></canvas><input type="range" name="fps" min ="0.1" max ="50" id="fps" class ="fps"><label for="fps">FPS</label></div>';
     preview.innerHTML += animationContainer;
     main.appendChild(preview);
   }

@@ -1,4 +1,4 @@
-
+import Animation from '../model/animation';
 
 export default class Frames {
   constructor() {
@@ -40,7 +40,8 @@ export default class Frames {
       frameWrapper.appendChild(newFr);
       framesContainer.push(newFr);
       drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-      framesContainer.push(newFr);
+      const animation = new Animation(framesContainer);
+      animation.animationRender(framesContainer);
     });
     frames.addEventListener('click', (e) => {
       if (e.target.classList.contains('fa-trash-alt')) {
