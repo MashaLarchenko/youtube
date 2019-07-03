@@ -1,3 +1,5 @@
+import Prewiew from './tools/prewiew';
+
 export default class Animation {
   constructor(frames) {
     this.frames = frames;
@@ -39,5 +41,16 @@ export default class Animation {
       this.frames = [];
     });
     requestAnimationFrame(animate);
+    Prewiew.changeScreen();
   }
+
+//   static fullScreen() {
+//     const previewCanvas = document.querySelector('.preview');
+//     if (!previewCanvas.fullscreenElement) {
+//       previewCanvas.requestFullscreen();
+//       // alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+//     } else {
+//       previewCanvas.exitFullscreen();
+//     }
+//   }
 }
