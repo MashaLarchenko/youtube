@@ -13,9 +13,11 @@ export default class Animation {
     let count = 0;
     let timeBefore = 0;
     const fps = document.querySelector('.fps');
+    const fpsValue = document.querySelector('.fps_value');
     let interval = fps.value * 100;
     fps.addEventListener('input', () => {
       interval = fps.value * 100;
+      fpsValue.innerHTML = fps.value;
     });
     function animate(time) {
       if ((time - timeBefore) >= interval) {
@@ -43,14 +45,4 @@ export default class Animation {
     requestAnimationFrame(animate);
     Prewiew.changeScreen();
   }
-
-//   static fullScreen() {
-//     const previewCanvas = document.querySelector('.preview');
-//     if (!previewCanvas.fullscreenElement) {
-//       previewCanvas.requestFullscreen();
-//       // alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-//     } else {
-//       previewCanvas.exitFullscreen();
-//     }
-//   }
 }

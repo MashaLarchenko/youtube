@@ -9,10 +9,10 @@ export default class Tools {
     const secondaryColor = document.querySelector('.secondColor');
     const tools = document.querySelector('.tools');
     const cleanButton = document.querySelector('.clean');
-    const size = document.querySelector('.size_contaner');
+    const size = document.querySelector('.size_container');
     const toolSize = document.querySelector('.tool-size_container');
     const canvas = document.querySelector('.draw_canvas');
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false });
     ctx.fillStyle = '#e6e6e6';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 

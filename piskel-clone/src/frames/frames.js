@@ -14,23 +14,17 @@ export default class Frames {
     const drawCtx = drawCanvas.getContext('2d');
     const framesContainer = [];
     const addButton = document.querySelector('.addFrames');
-    const frameContext = frameCanvas.getContext('2d');
-    frameContext.fillStyle = '#e6e6e6';
-    frameContext.fillRect(0, 0, frameCanvas.width, frameCanvas.height);
     this.activeFrame = frameCanvas;
     let count = 1;
     framesContainer.push(frame);
 
 
     addButton.addEventListener('click', () => {
-      count += count;
+      count += 1;
       this.activeFrame.classList.remove('active_tool');
       const newFr = frame.cloneNode(true);
       newFr.className += ` frame${count}`;
       const newframeCanvas = newFr.querySelector('.frame_canvas');
-      const newframeContext = newframeCanvas.getContext('2d');
-      newframeContext.fillStyle = '#e6e6e6';
-      newframeContext.fillRect(0, 0, newframeContext.width, newframeContext.height);
       this.activeFrame = newframeCanvas;
       this.activeFrame.classList.add('active_tool');
       const newButton = newFr.querySelector('.fa-trash-alt');

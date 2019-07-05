@@ -26,7 +26,7 @@ export default class View {
     const sizeFour = '<div class="size-item size-four"></div>';
     const toolSize = `<div class="tool-size_container">${sizeOne}${sizeTwo}${sizeThree}${sizeFour}`;
     canvasSize.classList.add('size_wrapper');
-    const sizeContainer = '<p class="size_label">Canvas size</p><select class="size_contaner"><option class="size_32">32X32</option><option class="size_64">64X64</option><option class="size_128">128X128</option></select>';
+    const sizeContainer = '<p class="size_label">Canvas size</p><select class="size_container"><option class="size_32">32X32</option><option class="size_64">64X64</option><option class="size_128">128X128</option></select>';
     toolsSection.classList.add('tools');
     const cleanCanvas = '<button class="clean"> Clean </button>';
     const penTool = '<li class="tool-item" ><button class="pen tool_button"><i class="fas fa-pencil-alt pen"></i></button></li>';
@@ -65,7 +65,8 @@ export default class View {
     const main = document.querySelector('main');
     const fullScreenButton = '<button class="full_screen">Full Screen</button>';
     preview.classList.add('animation');
-    const animationContainer = '<div><canvas class="preview canvas" width = "300px" height="300px"></canvas><input type="range" name="fps" min ="0.1" max ="50" id="fps" class ="fps"><label for="fps">FPS</label></div>';
+    const fpsInput = '<input type="range" name="fps" min ="0.1" max ="50" id="fps" class ="fps"><label for="fps">FPS</label><div class="fps_value"></div>';
+    const animationContainer = `<div><canvas class="preview canvas" width = "300px" height="300px"></canvas>${fpsInput}</div>`;
     preview.innerHTML += animationContainer;
     preview.innerHTML += fullScreenButton;
     main.appendChild(preview);
