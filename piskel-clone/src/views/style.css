@@ -21,7 +21,7 @@ body {
   grid-template-rows: 50px 1fr;
   font-family: 'Roboto', sans-serif;
   background: rgb(2, 0, 36);
-  background: linear-gradient(90deg, rgba(2, 0, 36, 0.75) 0%, rgba(250, 236, 18, 1) 10%, rgba(183, 30, 30, 0.93) 100%);
+  background:linear-gradient(90deg, rgba(34, 3, 52, 0.69) 0%, rgba(111, 190, 229, 0.44) 10%, rgba(84, 167, 209, 0.93) 100%)
 }
 
 header {
