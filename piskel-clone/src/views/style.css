@@ -15,6 +15,8 @@ button:active, button:focus {
 body {
   display: grid;
   position: relative;
+  height: 100vh;
+  width: 100vw;
   z-index: 2;
   grid-template-rows: 50px 1fr;
   font-family: 'Roboto', sans-serif;
@@ -24,7 +26,7 @@ body {
 
 header {
   position: relative;
-  height: 50px;
+  height: 10vh;
   grid-row: 1;
   background-color: #0e0c0c;
   color: #d2de72;
@@ -33,7 +35,7 @@ header {
 
 header h1 {
   position: relative;
-  padding-left: 850px;
+  padding-left: 45%;
   padding-top: 5px;
   font-size: 22px;
 }
@@ -42,7 +44,7 @@ header h1 {
   display: grid;
   grid-row: 2;
   grid-template-columns: 1fr minmax(150px, 1fr) 12fr 2fr;
-  grid-template-areas: "palette  frames draw animation" ". addButton draw size";
+  grid-template-areas: "palette frames draw animation" ". addButton draw size";
 }
 
 [draggable] {
@@ -59,6 +61,8 @@ header h1 {
 }
 
 .tools {
+  display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
   grid-row: 2;
   grid-column: 2;
   grid-area: palette;
@@ -66,11 +70,13 @@ header h1 {
 
 .tool-size_container {
   display: grid;
+  grid-row: 1;
+  grid-column: 1;
   grid-template-columns: repeat(4, 1fr);
-  position: absolute;
-  width: 100px;
-  top: 100px;
-  height: 60px;
+  position: relative;
+  width: 6vw;
+  top: 12vh;
+  height: 4vh;
 }
 
 .size-item {
@@ -111,13 +117,13 @@ header h1 {
 
 .tools-container {
   display: grid;
+  grid-row: 2;
   grid-template-rows: repeat(4, 1fr);
+  position: relative;
   width: max-content;
-  justify-content: center;
+  justify-self: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
   background-color: rgb(68, 68, 68);
-  position: relative;
-  top: 135px;
 }
 
 .tool-item .fas {
@@ -137,18 +143,18 @@ header h1 {
 .color_container {
   grid-column: 1;
   position: relative;
-  bottom: 540%;
 }
 
 .frames {
   position: relative;
-  top: 50px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  top: 25%;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 700px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  
 }
 
 .frame {
@@ -197,22 +203,23 @@ header h1 {
 }
 
 .draw_container {
-  height: 110%;
+  grid-area: draw;
   background-color: rgba(68, 68, 68, 0.7);
   border: 1px solid black;
 }
 
 .draw_canvas {
-  grid-area: draw;
-  width: 950px;
-  height: 845px;
-  margin-left: 190px;
+  position: relative;
+    top: 5vh;
+    left: 5vw;
+  width: 50vw;
+  height: 85vh;
 }
 
 .size_wrapper {
   position: absolute;
-  top: 46%;
-  right: 65px;
+  top: 80vh;
+    right: 5vw;
   grid-area: size;
 }
 
@@ -253,31 +260,31 @@ header h1 {
 
 .clean {
   position: relative;
-  top: 155px;
-  width: 55px;
-  height: 30px;
+  grid-row: 3;
+  height: 5vh;
+  align-self: center;
   background-color: #444444;
   color: white;
   border: 1px solid #4c4c44;
 }
 
 .firstColor {
-  width: 50px;
-  height: 50px;
+  width: 55%;
+  height: 9vh;
 }
 
 .secondColor {
   position: relative;
-  top: 25px;
-  right: 15px;
-  width: 50px;
-  height: 50px;
+  left: 30%;
+  bottom: 5vh;
+  width: 55%;
+  height: 9vh;
 }
 
 .fps_value {
   position: relative;
-  left: 60%;
-  bottom: 25px;
+  /* left: 60%;
+  bottom: 25px; */
   width: 70px;
   height: 24px;
   background-color: lightgrey;
