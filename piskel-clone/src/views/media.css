@@ -1,0 +1,35 @@
+@media screen and (max-width: 1200px) {
+    .size_wrapper {
+        position: relative;
+        top:0;
+        right: 0;
+        bottom: 70%;
+    }
+
+    .full_screen {
+        top: 24vh;
+        left: 15vw;
+    }
+
+    .fps_value {
+        left: 5vw;
+    }
+}
+
+@media screen and (max-width: 740px) {
+    .size_wrapper {
+        position: relative;
+         top: 50%;
+    }
+
+    .full_screen {
+        top: 20vh;
+    }
+
+    .draw_canvas {
+        width: 100%;
+    }
+}
+
+
+
