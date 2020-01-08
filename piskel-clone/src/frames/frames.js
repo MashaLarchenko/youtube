@@ -5,19 +5,25 @@ export default class Frames {
     this.activeFrame = '';
   }
 
+  static getSizeOfCanvas() {
+    const drawCanvas = document.querySelector('.draw_canvas');
+
+    const drawCanwasWidth = drawCanvas.offsetWidth;
+    const drawCanwasHeight = drawCanvas.offsetHeight;
+    drawCanvas.setAttribute('width', `${drawCanwasWidth}px`);
+    drawCanvas.setAttribute('height', `${drawCanwasHeight}px`);
+  }
+
   static start() {
+    this.getSizeOfCanvas();
     const frame = document.querySelector('.frame');
     const frameCanvas = frame.querySelector('.frame_canvas');
     const frames = document.querySelector('.frames');
     const frameWrapper = document.querySelector('.frame_wrapper');
     const drawCanvas = document.querySelector('.draw_canvas');
 
-    window.addEventListener('resize', () => {
-      const drawCanwasWidth = drawCanvas.offsetWidth;
-      const drawCanwasHeight = drawCanvas.offsetHeight;
-      drawCanvas.setAttribute('width', `${drawCanwasWidth}px`);
-      drawCanvas.setAttribute('height', `${drawCanwasHeight}px`);
-    });
+
+    window.addEventListener('resize', this.getSizeOfCanvas);
 
 
     const drawCtx = drawCanvas.getContext('2d');

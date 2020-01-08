@@ -45,7 +45,7 @@ export default class Tools {
       const y = Math.ceil(ev.offsetY / unitSize) * unitSize;
       ctx.fillStyle = state.currentcolor;
       ctx.fillRect(x - unitSize, y - unitSize, unitSize * state.penSize, unitSize * state.penSize);
-      ctx.fill();
+      // ctx.fill();
     };
     const clear = (ev) => {
       const x = Math.ceil(ev.offsetX / unitSize) * unitSize;
@@ -121,7 +121,13 @@ export default class Tools {
     });
     canvas.addEventListener('mousedown', () => {
       if (state.currentTool === 'pen' || keycode.code === 'p') {
-        canvas.addEventListener('click', draw);
+        canvas.addEventListener('click', (ev) => {
+          const x = Math.ceil(ev.offsetX / unitSize) * unitSize;
+          const y = Math.ceil(ev.offsetY / unitSize) * unitSize;
+          ctx.fillStyle = state.currentcolor;
+          ctx.fillRect(x - unitSize, y - unitSize,
+            unitSize * state.penSize, unitSize * state.penSize);
+        });
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mousemove', () => {
           const currentFrame = Frames.activeFrame;
