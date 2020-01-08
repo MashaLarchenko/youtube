@@ -53,11 +53,14 @@ export default class View {
     const moveButton = '<button class="move-button"><i class="fas fa-arrows-alt"></i></button>';
     const addButton = '<button class="addFrames"> + Add new frames </button>';
     const frame = `<div class="frame_wrapper"><div class="frame" draggable="true"><canvas class="frame_canvas canvas active_tool" width="120px" height="120px"></canvas>${deleteButton}${duplicateButton}${moveButton}</div></div>`;
-    const drawCanvas = '<section class="draw_container"><canvas class="draw_canvas canvas" width= 950px height="845px"></canvas></section>';
+    const drawCanvas = '<section class="draw_container"><canvas class="draw_canvas canvas" width= "950px" height="845px"></canvas></section>';
+    // drawCanvas.setAttribute('width', `${drawCanwasWidth}px`);
     framesContainer.innerHTML += frame;
     main.appendChild(framesContainer);
     framesContainer.innerHTML += addButton;
     main.innerHTML += drawCanvas;
+    // const drawCanwasWidth = drawCanvas.offsetWidth;
+    // console.log(drawCanwasWidth);
   }
 
   static renderPreview() {

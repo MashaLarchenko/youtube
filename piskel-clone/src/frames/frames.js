@@ -11,6 +11,15 @@ export default class Frames {
     const frames = document.querySelector('.frames');
     const frameWrapper = document.querySelector('.frame_wrapper');
     const drawCanvas = document.querySelector('.draw_canvas');
+
+    window.addEventListener('resize', () => {
+      const drawCanwasWidth = drawCanvas.offsetWidth;
+      const drawCanwasHeight = drawCanvas.offsetHeight;
+      drawCanvas.setAttribute('width', `${drawCanwasWidth}px`);
+      drawCanvas.setAttribute('height', `${drawCanwasHeight}px`);
+    });
+
+
     const drawCtx = drawCanvas.getContext('2d');
     const framesContainer = [];
     const addButton = document.querySelector('.addFrames');
