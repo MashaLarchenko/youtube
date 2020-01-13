@@ -34,17 +34,15 @@ export default class View {
     const colorPicker = '<li class="tool-item "><button class="choose-color tool_button"><i class="fas fa-eye-dropper choose-color"></i></button></li>';
     const moveTool = '<li class="tool-item"><button class="move tool_button"><i class="fas fa-arrows-alt move"></i></button></li>';
     const eraster = '<li class="tool-item"><button class="eraster tool_button"><i class="fas fa-eraser eraster"></i></button></li>';
-    const toolContainer = `<ul class="tools-container">${penTool}${paintBucket}${colorPicker}${moveTool}${eraster}</ul>`;
+    const drawLine = '<li class="tool-item"><button class="drawLine tool_button"><i class="fas fa-minus drawLine""></i></button></li>';
+
+    const toolContainer = `<ul class="tools-container">${penTool}${paintBucket}${colorPicker}${moveTool}${eraster}${drawLine}</ul>`;
     toolsSection.innerHTML += toolSize;
     toolsSection.innerHTML += toolContainer;
     toolsSection.innerHTML += cleanCanvas;
     canvasSize.innerHTML += sizeContainer;
-    // main.innerHTML += toolSize;
-    // const tools = document.querySelector('.toolSize');
-    // tools.appendChild(toolSize);
     document.body.appendChild(main);
     main.appendChild(toolsSection);
-    // toolsSection.appendChild(toolSize);
     main.appendChild(canvasSize);
   }
 
@@ -58,13 +56,10 @@ export default class View {
     const addButton = '<button class="addFrames"> + Add new frames </button>';
     const frame = `<div class="frame_wrapper"><div class="frame" draggable="true"><canvas class="frame_canvas canvas active_tool" width="96px" height="96px"></canvas>${deleteButton}${duplicateButton}${moveButton}</div></div>`;
     const drawCanvas = '<section class="draw_container"><canvas class="draw_canvas canvas"></canvas></section>';
-    // drawCanvas.setAttribute('width', `${drawCanwasWidth}px`);
     framesContainer.innerHTML += frame;
     main.appendChild(framesContainer);
     framesContainer.innerHTML += addButton;
     main.innerHTML += drawCanvas;
-    // const drawCanwasWidth = drawCanvas.offsetWidth;
-    // console.log(drawCanwasWidth);
   }
 
   static renderPreview() {
@@ -83,10 +78,8 @@ export default class View {
     const colorContainer = document.createElement('div');
     colorContainer.classList.add('color_container');
     const main = document.querySelector('.tools');
-    // const tools = document.querySelector('.toolSize');
     const colors = '<input type="color" class="firstColor"><input type="color" class="secondColor">';
     colorContainer.innerHTML += colors;
     main.appendChild(colorContainer);
-    // main.appendChild(tools);
   }
 }

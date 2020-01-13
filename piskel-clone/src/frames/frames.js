@@ -1,9 +1,12 @@
+
 import Animation from '../model/animation';
 
 export default class Frames {
   constructor() {
     this.activeFrame = '';
+    this.painting = false;
   }
+
 
   static getSizeOfCanvas() {
     const drawCanvas = document.querySelector('.draw_canvas');
@@ -21,8 +24,6 @@ export default class Frames {
     const frames = document.querySelector('.frames');
     const frameWrapper = document.querySelector('.frame_wrapper');
     const drawCanvas = document.querySelector('.draw_canvas');
-
-
     window.addEventListener('resize', this.getSizeOfCanvas);
 
 
@@ -32,7 +33,6 @@ export default class Frames {
     this.activeFrame = frameCanvas;
     let count = 1;
     framesContainer.push(frame);
-
 
     addButton.addEventListener('click', () => {
       count += 1;

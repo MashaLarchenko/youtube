@@ -26,6 +26,8 @@ export default class Tools {
       activeFrame: '',
       activeTool: '',
       activePenSize: '',
+      fullCoord: [],
+      painting: false,
     };
     const unitSize = canvas.width / state.canvasSize;
 
@@ -45,14 +47,29 @@ export default class Tools {
       const y = Math.ceil(ev.offsetY / unitSize) * unitSize;
       ctx.fillStyle = state.currentcolor;
       ctx.fillRect(x - unitSize, y - unitSize, unitSize * state.penSize, unitSize * state.penSize);
-      // ctx.fill();
+      ctx.fill();
     };
     const clear = (ev) => {
       const x = Math.ceil(ev.offsetX / unitSize) * unitSize;
       const y = Math.ceil(ev.offsetY / unitSize) * unitSize;
       ctx.clearRect(x - unitSize, y - unitSize, unitSize * state.penSize, unitSize * state.penSize);
     };
+    const getStartdrawCoord = (ev) => {
+      ctx.beginPath();
+      const x = Math.ceil(ev.offsetX / unitSize) * unitSize;
+      const y = Math.ceil(ev.offsetY / unitSize) * unitSize;
+      state.fullCoord.push([x, y]);
+      state.painting = true;
+    };
+    const getEndDrawCoord = (ev) => {
+      const x = Math.ceil(ev.offsetX / unitSize) * unitSize;
+      const y = Math.ceil(ev.offsetY / unitSize) * unitSize;
+      state.fullCoord.push([x, y]);
+      state.painting = true;
+    };
+
     tools.addEventListener('click', (event) => {
+      state.painting = false;
       if (event.target !== state.activeTool && state.activeTool !== '') {
         state.activeTool.classList.remove('active_tool');
       }
@@ -72,6 +89,8 @@ export default class Tools {
         state.currentTool = 'pen';
       } else if (event.target.classList.contains('eraster')) {
         state.currentTool = 'eraster';
+      } else if (event.target.classList.contains('drawLine')) {
+        state.currentTool = 'drawLine';
       } else {
         state.currentTool = '';
       }
@@ -121,13 +140,7 @@ export default class Tools {
     });
     canvas.addEventListener('mousedown', () => {
       if (state.currentTool === 'pen' || keycode.code === 'p') {
-        canvas.addEventListener('click', (ev) => {
-          const x = Math.ceil(ev.offsetX / unitSize) * unitSize;
-          const y = Math.ceil(ev.offsetY / unitSize) * unitSize;
-          ctx.fillStyle = state.currentcolor;
-          ctx.fillRect(x - unitSize, y - unitSize,
-            unitSize * state.penSize, unitSize * state.penSize);
-        });
+        canvas.addEventListener('click', draw);
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mousemove', () => {
           const currentFrame = Frames.activeFrame;
@@ -146,6 +159,29 @@ export default class Tools {
         canvas.addEventListener('mouseup', () => {
           canvas.removeEventListener('mousemove', clear);
         });
+      } else if (state.currentTool === 'drawLine') {
+        canvas.addEventListener('click', getStartdrawCoord);
+        canvas.addEventListener('mouseup', getEndDrawCoord);
+        if (state.fullCoord.length !== 0) {
+          ctx.strokeStyle = state.currentcolor;
+          const coordC = state.fullCoord;
+          ctx.lineWidth = unitSize * state.penSize;
+          ctx.moveTo(coordC[0][0], coordC[0][1]);
+          coordC.forEach((item) => {
+            ctx.lineTo(item[0], item[1]);
+            ctx.stroke();
+          });
+          const currentFrame = Frames.activeFrame;
+          const im = canvas.toDataURL('image/png');
+          const img = new Image();
+          img.src = im;
+          const cont = currentFrame.getContext('2d');
+          cont.drawImage(img, 0, 0, currentFrame.width, currentFrame.height);
+          if (!state.painting) {
+            canvas.removeEventListener('click', getStartdrawCoord);
+            canvas.removeEventListener('mouseup', getEndDrawCoord);
+          }
+        }
       }
     });
     canvas.addEventListener('click', (event) => {
@@ -155,6 +191,8 @@ export default class Tools {
       }
     });
     toolSize.addEventListener('click', (e) => {
+      state.painting = false;
+
       if (e.target !== state.activePenSize && state.activePenSize !== '') {
         state.activePenSize.classList.remove('active_tool');
       }
