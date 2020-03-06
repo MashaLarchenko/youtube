@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import AppModel from '../models/AppModel';
 import SearchView from '../views/AppView';
+// import SliderButton from '../views/AppView/SliderButton';
 
 export default class App {
   constructor() {
@@ -12,6 +14,7 @@ export default class App {
 
   async start() {
     SearchView.render();
+    // SliderButton.render();
     const model = new AppModel(this.state);
     const data = await model.getClip();
   }

@@ -40,19 +40,44 @@ button {
 }
 
 .card-elem {
-  /* position: absolute; */
-  flex: 0 0 25%;
-  max-width: 25%;
-  /* height: 20%; */
-  margin: 0 15px 0 15px;
+  width: calc(100% / 4.5);
   border: 2px solid red;
   border-radius: 7%;
   -webkit-box-shadow: 45px 15px 35px -30px  rgba(217,80,80,1);
   -moz-box-shadow: 45px 15px 35px -30px rgba(217,80,80,1);
   box-shadow: 45px 15px 35px -30px rgba(217,80,80,1);
-
+  /* -webkit-animation-name: example; 
+  -webkit-animation-duration: 4s; 
+  animation-name: example;
+  animation-duration: 4s; */
 }
-.card-elem:hover{
+
+.card-elem:first-child {
+  -webkit-animation-name: example; 
+  -webkit-animation-duration: 4s; 
+  animation-name: example;
+  animation-duration: 2s;
+}
+.card-elem:nth-child(2) {
+  -webkit-animation-name: example; 
+  -webkit-animation-duration: 4s; 
+  animation-name: example;
+  animation-duration: 3s;
+}
+.card-elem:nth-child(3) {
+  -webkit-animation-name: example; /* Chrome, Safari, Opera */
+  -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+  animation-name: example;
+  animation-duration: 4s;
+}
+.card-elem:nth-child(4) {
+  -webkit-animation-name: example; /* Chrome, Safari, Opera */
+  -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+  animation-name: example;
+  animation-duration: 5s;
+}
+
+.card-elem:hover {
   background-color: red;
 }
 
@@ -75,6 +100,7 @@ button {
   position: relative;
   left: 0px;
   display: flex;
+  justify-content: space-around;
   max-height: 500px;
   transition:  0.6s ease;
 
@@ -120,4 +146,19 @@ body {
   /* top:150px; */
   justify-self: center;
 }
+
+@-webkit-keyframes example {
+  0% {opacity: 0;}
+  50% {opacity:0.5;}
+  75% {opacity:0.8;}
+  100% {opacity:1;}
+ }
+  
+ /* Standard syntax */
+ @keyframes example {
+  0% {opacity: 0;}
+  50% {opacity:0.5;}
+  75% {opacity:0.8;}
+  100% {opacity:1;}
+ }
 

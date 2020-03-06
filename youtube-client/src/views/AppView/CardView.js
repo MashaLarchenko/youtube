@@ -15,7 +15,7 @@ export default class CardView {
   }
 
   getCardInfo() {
-    const date = this.date;
+    const { date } = this;
     const stringDate = date.slice(0, date.indexOf('T'));
     return `<div class="card-info">
     <p class="card-channel"><i class="fas fa-user-alt"></i>${this.cannel}</p>

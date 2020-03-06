@@ -1,8 +1,9 @@
 import CardView from './CardView';
 
 export default class AppView {
-  constructor(data) {
+  constructor(data, currentPage) {
     this.data = data;
+    this.currentPage = currentPage;
   }
 
   render() {
@@ -12,24 +13,60 @@ export default class AppView {
     cardContainer.classList.add('card-container');
     document.body.appendChild(cardContainer);
     cardContainer.appendChild(cardWrapper);
+    this.renderCurrentClip();
+    // cardWrapper.innerHTML = null;
+    // const start = this.currentPage * 4;
+    // const end = start + 4;
+    // const currentItems = this.data.slice(start, end);
+    // const list = AppView.renderClip(currentItems);
+    // cardWrapper.innerHTML = list;
+    // console.log(currentItems, list);
+  }
 
-    const list = this.renderClip(this.data);
+  renderCurrentClip() {
+    const cardWrapper = document.querySelector('.card-wrapper');
+    cardWrapper.innerHTML = null;
+    const start = this.currentPage === 1 ? this.currentPage - 1 : (this.currentPage - 1) * 4;
+    console.log(start);
+    const end = start + 4;
+    const currentItems = this.data.slice(start, end);
+    const list = AppView.renderClip(currentItems);
+    cardWrapper.innerHTML = list;
+    console.log(this.data);
+  }
+
+  renderPreviousClip() {
+    const cardWrapper = document.querySelector('.card-wrapper');
+    cardWrapper.innerHTML = null;
+    const start = this.currentPage === 1 ? this.currentPage + 4 : (this.currentPage - 1) * 4;
+    // console.log(start);
+    const end = start - 4;
+    const currentItems = this.data.slice(end, start);
+    console.log(start, end);
+    const list = AppView.renderClip(currentItems);
     cardWrapper.innerHTML = list;
   }
 
-  renderClip() {
-    return this.data.map((card) => {
-      const cardEl = new CardView(card);
-      return `${cardEl.render()}`;
-    }).join('');
+  static renderClip(currentItems) {
+    return currentItems
+      .map((card) => {
+        const cardEl = new CardView(card);
+        return `${cardEl.render()}`;
+      })
+      .join('');
   }
 
   renderNextPage() {
-    const nextlist = this.renderClip(this.data);
-    console.log(nextlist);
     const cardWrapper = document.querySelector('.card-wrapper');
-    console.log(cardWrapper);
+    cardWrapper.innerHTML = null;
+    const start = this.currentPage === 1 ? this.currentPage - 1 : (this.currentPage - 1) * 4;
+    const end = start + 4;
+    const currentItems = this.data.slice(start, end);
+    const nextlist = AppView.renderClip(currentItems);
+    // console.log(nextlist);
+    // console.log(cardWrapper);
     cardWrapper.innerHTML += nextlist;
-    console.log(cardWrapper);
+    // console.log(cardWrapper);
+    console.log(this.data);
   }
 }

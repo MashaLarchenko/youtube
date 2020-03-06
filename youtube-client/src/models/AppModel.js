@@ -1,3 +1,6 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-param-reassign */
 import SearchView from '../views/AppView/SearchView';
 
 import AppView from '../views/AppView/AppView';
@@ -10,6 +13,8 @@ export default class AppModel {
     this.statisticUrl = state;
     this.search = new SearchView();
     this.data = '';
+    this.token = '';
+    this.allData = [];
   }
 
 
@@ -36,15 +41,18 @@ export default class AppModel {
 
   async nextPage(data, url, req) {
     const { statisticUrl } = this.statisticUrl;
-    const token = data.nextPageToken;
-    const responce = await fetch(`${url}&q=${req}&pageToken=${token}`);
+    // console.log(data);
+    const responce = await fetch(`${url}&q=${req}&pageToken=${this.token}`);
     const responsData = await responce.json();
-    console.log(responsData);
+    this.token = responsData.nextPageToken;
+    // console.log(responsData);
     const videoId = await AppModel.exstractClipId(responsData);
     const idResult = await AppModel.searchById(statisticUrl, videoId);
-    console.log(idResult);
+    // console.log(idResult);
     const clipInfo = await AppModel.extractClipItems(idResult);
-    console.log(clipInfo);
+    // console.log(clipInfo, responsData, responce, 1111);
+    this.allData.push(...clipInfo);
+    console.log(this.allData);
     return clipInfo;
   }
 
@@ -52,11 +60,10 @@ export default class AppModel {
     let position = pos;
     let isDown = false;
     let start;
-    let scrollLeft;
+    // let scrollLeft;
     card.addEventListener('mousedown', (e) => {
       isDown = true;
       start = e.pageX;
-
     });
     card.addEventListener('mouseleave', () => {
       isDown = false;
@@ -85,43 +92,52 @@ export default class AppModel {
 
   async getData(url, statisticUrl, body, box, value) {
     const content = document.querySelector('.card-container');
-    value = box.value;
-    const data = await AppModel.searchBy(url, box.value);
-    const videoId = await AppModel.exstractClipId(data);
-    const idResult = await AppModel.searchById(statisticUrl, videoId);
-    const clipInfo = await AppModel.extractClipItems(idResult);
-    const clip = new AppView(clipInfo);
-    clip.render();
-
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('button-container');
     document.body.appendChild(buttonContainer);
     const buttonSlider = SliderButton.render();
     buttonContainer.innerHTML += buttonSlider;
+    const currentPage = document.querySelector('.current');
+    value = box.value;
+    let count = 1;
+    currentPage.innerHTML = count;
+    const data = await AppModel.searchBy(url, box.value);
+    this.token = data.nextPageToken;
+    const videoId = await AppModel.exstractClipId(data);
+    const idResult = await AppModel.searchById(statisticUrl, videoId);
+    let clipInfo = await AppModel.extractClipItems(idResult);
+    console.log(clipInfo);
+    this.allData.push(...clipInfo);
+    const clip = new AppView(clipInfo, count);
+    clip.render();
+
     const nextButton = document.querySelector('.next');
     const prevButton = document.querySelector('.prev');
-    const currentPage = document.querySelector('.current');
     const card = document.querySelector('.card-wrapper');
     const cardElem = document.querySelector('.card-elem');
     const cardWidth = window.getComputedStyle(cardElem).getPropertyValue('width');
     const width = cardWidth.slice(0, cardWidth.indexOf('p'));
     const currentPos = window.getComputedStyle(card).getPropertyValue('left');
-    let pos = currentPos.slice(0, currentPos.indexOf('p'));
+    const pos = currentPos.slice(0, currentPos.indexOf('p'));
     AppModel.swipeSlide(card, pos, width);
-
-    let count = 1;
-    currentPage.innerHTML = count;
-
+    let clickCount = 1;
     nextButton.addEventListener('click', async () => {
       count++;
+      if (clickCount === 4) {
+        clickCount = 1;
+      } else {
+        clickCount++;
+      }
       currentPage.innerHTML = count;
       if (count % 4 === 0) {
         const nextData = await this.nextPage(data, url, value);
-        const nextClip = new AppView(nextData);
-        nextClip.renderNextPage();
+        clipInfo = nextData;
+        const nextClip = new AppView(clipInfo, clickCount);
+        nextClip.renderCurrentClip();
+        console.log(clipInfo, nextData);
       } else {
-        pos = `${+pos - (width * 4) - 105}`;
-        card.style.left = `${pos}px`;
+        const nextPageClip = new AppView(clipInfo, clickCount);
+        nextPageClip.renderCurrentClip();
       }
     });
 
@@ -130,14 +146,20 @@ export default class AppModel {
       if (count < 0) {
         count = 0;
       }
-      currentPage.innerHTML = count;
-      pos = `${+pos + (width * 4) + 105}`;
-      if (pos > 0) {
-        card.style.left = '0px';
-        pos = 0;
-      } else {
-        card.style.left = `${pos}px`;
+      if (clickCount !== 1) {
+        clickCount--;
       }
+      currentPage.innerHTML = count;
+
+      const prevClip = new AppView(this.allData, count);
+      prevClip.renderPreviousClip();
+      // pos = `${+pos + (width * 4) + 105}`;
+      // if (pos > 0) {
+      //   card.style.left = '0px';
+      //   pos = 0;
+      // } else {
+      //   card.style.left = `${pos}px`;
+      // }
     });
     while (content.firstChild) {
       content.removeChild(content.firstChild);
