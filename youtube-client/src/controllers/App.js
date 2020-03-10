@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
 import AppModel from '../models/AppModel';
 import SearchView from '../views/AppView';
-import SliderButton from '../views/AppView/SliderButton';
 
 export default class App {
   constructor() {
@@ -14,18 +12,11 @@ export default class App {
 
   async start() {
     SearchView.render();
-    // SliderButton.render();
     const model = new AppModel(this.state);
-    // const buttonContainer = document.createElement('div');
-    // buttonContainer.classList.add('button-container');
-    // document.body.appendChild(buttonContainer);
-    // const buttonSlider = SliderButton.render();
-    // buttonContainer.innerHTML += buttonSlider;
     const box = document.querySelector('input');
     await model.getClip();
     box.addEventListener('change', async () => {
       await model.getClip();
     });
-    // const data = await model.getClip();
   }
 }

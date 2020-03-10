@@ -50,7 +50,7 @@ export default class AppView {
     // console.log(start);
     const end = start - 4;
     const currentItems = this.data.slice(end, start);
-    console.log(start, end);
+    console.log(start, end, this.currentPage);
     const list = AppView.renderClip(currentItems);
     cardWrapper.innerHTML = list;
   }

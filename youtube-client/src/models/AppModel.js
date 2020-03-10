@@ -15,6 +15,9 @@ export default class AppModel {
     this.data = '';
     this.token = '';
     this.allData = [];
+    this.count = 1;
+    this.clickCount = 1;
+    this.clipInfo = [];
   }
 
 
@@ -41,23 +44,55 @@ export default class AppModel {
 
   async nextPage(data, url, req) {
     const { statisticUrl } = this.statisticUrl;
-    // console.log(data);
+
     const responce = await fetch(`${url}&q=${req}&pageToken=${this.token}`);
     const responsData = await responce.json();
     this.token = responsData.nextPageToken;
-    // console.log(responsData);
     const videoId = await AppModel.exstractClipId(responsData);
     const idResult = await AppModel.searchById(statisticUrl, videoId);
-    // console.log(idResult);
-    const clipInfo = await AppModel.extractClipItems(idResult);
-    // console.log(clipInfo, responsData, responce, 1111);
-    this.allData.push(...clipInfo);
+    this.clipInfo = await AppModel.extractClipItems(idResult);
+    this.allData.push(...this.clipInfo);
     console.log(this.allData);
-    return clipInfo;
+    return this.clipInfo;
   }
 
-  static swipeSlide(card, pos, width) {
-    let position = pos;
+  async getNextData(currentPage, data, url, value) {
+    this.count++;
+    if (this.clickCount === 4) {
+      this.clickCount = 1;
+    } else {
+      this.clickCount++;
+    }
+    currentPage.innerHTML = this.count;
+    if (this.count % 3 === 0) {
+      const nextData = await this.nextPage(data, url, value);
+      const lastData = this.clipInfo.slice(-3);
+      lastData.push(...nextData);
+      this.clipInfo = lastData;
+      const nextClip = new AppView(this.clipInfo, this.clickCount, this.count);
+      nextClip.renderCurrentClip();
+    } else {
+      const nextPageClip = new AppView(this.clipInfo, this.clickCount, this.count);
+      nextPageClip.renderCurrentClip();
+    }
+  }
+
+  getPrevData(currentPage) {
+    this.count--;
+    if (this.count < 0) {
+      this.count = 1;
+    }
+    if (this.clickCount !== 1) {
+      this.clickCount--;
+    }
+    currentPage.innerHTML = this.count;
+
+    const prevClip = new AppView(this.allData, this.count);
+    prevClip.renderPreviousClip();
+  }
+
+  swipeSlide(card, pos, width, params) {
+    // const position = pos;
     let isDown = false;
     let start;
     // let scrollLeft;
@@ -68,33 +103,25 @@ export default class AppModel {
     card.addEventListener('mouseleave', () => {
       isDown = false;
     });
-    card.addEventListener('mouseup', () => {
+    card.addEventListener('mouseup', (e) => {
       isDown = false;
+      if (start < e.pageX) {
+        this.getPrevData(params[0]);
+      } else {
+        this.getNextData(...params);
+      }
     });
     card.addEventListener('mousemove', (e) => {
       if (!isDown) return;
       e.preventDefault();
-      if (start < e.pageX) {
-        position = `${+position + (width * 4) + 105}`;
-        if (position > 0) {
-          card.style.left = '0px';
-          position = 0;
-        } else {
-          card.style.left = `${position}px`;
-        }
-      } else {
-        position = `${+position - (width * 4) - 105}`;
-        card.style.left = `${position}px`;
-      }
     });
   }
 
 
-  async getData(url, statisticUrl, body, box, value) {
+  async getData(url, statisticUrl, box, value) {
     const content = document.querySelector('.card-container');
 
     const btnContainer = document.querySelector('.button-container');
-    console.log(!!btnContainer);
     if (!btnContainer) {
       const buttonContainer = document.createElement('div');
       buttonContainer.classList.add('button-container');
@@ -103,17 +130,17 @@ export default class AppModel {
       buttonContainer.innerHTML += buttonSlider;
     }
     const currentPage = document.querySelector('.current');
-    let count = 1;
-    currentPage.innerHTML = count;
+    // let count = 1;
+    currentPage.innerHTML = this.count;
     const data = await AppModel.searchBy(url, box.value);
     this.token = data.nextPageToken;
     const videoId = await AppModel.exstractClipId(data);
     const idResult = await AppModel.searchById(statisticUrl, videoId);
-    let clipInfo = await AppModel.extractClipItems(idResult);
-    console.log(clipInfo);
-    this.allData.push(...clipInfo);
-    const clip = new AppView(clipInfo, count);
+    this.clipInfo = await AppModel.extractClipItems(idResult);
+    this.allData.push(...this.clipInfo);
+    const clip = new AppView(this.clipInfo, this.count);
     clip.render();
+    console.log(this.allData);
 
     const nextButton = document.querySelector('.next');
     const prevButton = document.querySelector('.prev');
@@ -123,79 +150,31 @@ export default class AppModel {
     const width = cardWidth.slice(0, cardWidth.indexOf('p'));
     const currentPos = window.getComputedStyle(card).getPropertyValue('left');
     const pos = currentPos.slice(0, currentPos.indexOf('p'));
-    AppModel.swipeSlide(card, pos, width);
-    let clickCount = 1;
-    nextButton.addEventListener('click', async () => {
-      count++;
-      if (clickCount === 4) {
-        clickCount = 1;
-      } else {
-        clickCount++;
-      }
-      currentPage.innerHTML = count;
-      if (count % 3 === 0) {
-        const nextData = await this.nextPage(data, url, value);
-        const lastData = clipInfo.slice(-3);
-        lastData.push(...nextData);
-        clipInfo = lastData;
-        const nextClip = new AppView(clipInfo, clickCount, count);
-        nextClip.renderCurrentClip();
-        console.log(lastData, nextData);
-      } else {
-        const nextPageClip = new AppView(clipInfo, clickCount, count);
-        nextPageClip.renderCurrentClip();
-      }
-    });
+    const params = [currentPage, data, url, value];
+    this.swipeSlide(card, pos, width, params);
+    // let clickCount = 1;
+    // const getData = this.getNextData.bind(this, ...params);
+    nextButton.addEventListener('click', this.getNextData.bind(this, ...params));
 
-    prevButton.addEventListener('click', () => {
-      count--;
-      if (count < 0) {
-        count = 0;
-      }
-      if (clickCount !== 1) {
-        clickCount--;
-      }
-      currentPage.innerHTML = count;
+    prevButton.addEventListener('click', this.getPrevData.bind(this, currentPage));
 
-      const prevClip = new AppView(this.allData, count);
-      prevClip.renderPreviousClip();
-    });
     while (content.firstChild) {
       content.removeChild(content.firstChild);
     }
-    // const buttonC = document.querySelector('.button-container');
 
     content.parentNode.removeChild(content);
-    // buttonContainer.parentNode.removeChild(buttonC);
   }
 
   async getClip() {
     const box = document.querySelector('input');
     const searchButton = document.querySelector('.search-button');
-    // const content = document.querySelector('.card-container');
-    // const buttonContainer = document.querySelector('.button-container');
-    // console.log(!!content, !!buttonContainer);
-    // if (content && buttonContainer) {
-    //   document.body.removeChild(content);
-    //   document.body.removeChild(buttonContainer);
-    //   console.log(555);
-    // }
-
     const value = box.value;
     const { url } = this.url;
     const { statisticUrl } = this.statisticUrl;
     const { body } = document;
 
     const searchData = this.getData.bind(this, url, statisticUrl, body, box, value);
-    console.log(searchData, 'search');
 
     searchButton.addEventListener('click', searchData);
-    // const content = document.querySelector('.card-container');
-    // const buttonContainer = document.querySelector('.button-container');
-    // if (content && buttonContainer) {
-    //   document.body.removeChild(content);
-    //   document.body.removeChild(buttonContainer);
-    //   console.log(555);
-    // }
   }
 }
