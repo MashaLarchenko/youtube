@@ -1,9 +1,11 @@
 import CardView from './CardView';
 
 export default class AppView {
-  constructor(data, currentPage) {
+  constructor(data, currentPage, count) {
     this.data = data;
     this.currentPage = currentPage;
+    this.count = count;
+    this.lastInPage = [];
   }
 
   render() {
@@ -30,9 +32,15 @@ export default class AppView {
     console.log(start);
     const end = start + 4;
     const currentItems = this.data.slice(start, end);
+    if (this.lastInPage) {
+      currentItems.unshift(...this.lastInPage);
+    }
+    if (this.count % 4 === 0) {
+      this.lastInPage = currentItems;
+    }
     const list = AppView.renderClip(currentItems);
     cardWrapper.innerHTML = list;
-    console.log(this.data);
+    console.log(111, currentItems, this.lastInPage);
   }
 
   renderPreviousClip() {
@@ -57,16 +65,17 @@ export default class AppView {
   }
 
   renderNextPage() {
+    console.log(222);
     const cardWrapper = document.querySelector('.card-wrapper');
     cardWrapper.innerHTML = null;
     const start = this.currentPage === 1 ? this.currentPage - 1 : (this.currentPage - 1) * 4;
     const end = start + 4;
     const currentItems = this.data.slice(start, end);
+    console.log(111, currentItems, this.lastInPage);
+    if (this.lastInPage) {
+      currentItems.unshift(...this.lastInPage);
+    }
     const nextlist = AppView.renderClip(currentItems);
-    // console.log(nextlist);
-    // console.log(cardWrapper);
     cardWrapper.innerHTML += nextlist;
-    // console.log(cardWrapper);
-    console.log(this.data);
   }
 }
