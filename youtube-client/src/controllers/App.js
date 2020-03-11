@@ -1,5 +1,7 @@
 import AppModel from '../models/AppModel';
 import SearchView from '../views/AppView';
+import AppView from '../views/AppView/AppView';
+
 
 export default class App {
   constructor() {
@@ -12,6 +14,7 @@ export default class App {
 
   async start() {
     SearchView.render();
+    AppView.render();
     const model = new AppModel(this.state);
     const box = document.querySelector('input');
     await model.getClip();

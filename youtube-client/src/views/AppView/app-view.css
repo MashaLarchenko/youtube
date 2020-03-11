@@ -56,25 +56,25 @@ button {
   -webkit-animation-name: example; 
   -webkit-animation-duration: 4s; 
   animation-name: example;
-  animation-duration: 2s;
+  animation-duration: 0.3s;
 }
 .card-elem:nth-child(2) {
   -webkit-animation-name: example; 
   -webkit-animation-duration: 4s; 
   animation-name: example;
-  animation-duration: 3s;
+  animation-duration: 0.5s;
 }
 .card-elem:nth-child(3) {
   -webkit-animation-name: example; /* Chrome, Safari, Opera */
   -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
   animation-name: example;
-  animation-duration: 4s;
+  animation-duration: 0.74s;
 }
 .card-elem:nth-child(4) {
   -webkit-animation-name: example; /* Chrome, Safari, Opera */
   -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
   animation-name: example;
-  animation-duration: 5s;
+  animation-duration: 0.9s;
 }
 
 .card-elem:hover {
@@ -103,8 +103,6 @@ button {
   justify-content: space-around;
   max-height: 500px;
   transition:  0.6s ease;
-
-
 }
 
 .clip-image{

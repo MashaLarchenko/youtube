@@ -78,9 +78,9 @@ export default class AppModel {
   }
 
   getPrevData(currentPage) {
-    this.count--;
-    if (this.count < 0) {
-      this.count = 1;
+    // this.count--;
+    if (this.count > 1) {
+      this.count--;
     }
     if (this.clickCount !== 1) {
       this.clickCount--;
@@ -92,10 +92,8 @@ export default class AppModel {
   }
 
   swipeSlide(card, pos, width, params) {
-    // const position = pos;
     let isDown = false;
     let start;
-    // let scrollLeft;
     card.addEventListener('mousedown', (e) => {
       isDown = true;
       start = e.pageX;
@@ -118,9 +116,15 @@ export default class AppModel {
   }
 
 
-  async getData(url, statisticUrl, box, value) {
-    const content = document.querySelector('.card-container');
-
+  async getData(url, statisticUrl, value) {
+    console.log(value);
+    this.data = '';
+    this.token = '';
+    this.allData = [];
+    this.count = 1;
+    this.clickCount = 1;
+    this.clipInfo = [];
+    console.log(this.allData);
     const btnContainer = document.querySelector('.button-container');
     if (!btnContainer) {
       const buttonContainer = document.createElement('div');
@@ -130,18 +134,17 @@ export default class AppModel {
       buttonContainer.innerHTML += buttonSlider;
     }
     const currentPage = document.querySelector('.current');
-    // let count = 1;
     currentPage.innerHTML = this.count;
-    const data = await AppModel.searchBy(url, box.value);
+    const data = await AppModel.searchBy(url, value);
     this.token = data.nextPageToken;
     const videoId = await AppModel.exstractClipId(data);
     const idResult = await AppModel.searchById(statisticUrl, videoId);
     this.clipInfo = await AppModel.extractClipItems(idResult);
+    console.log(this.clipInfo);
     this.allData.push(...this.clipInfo);
     const clip = new AppView(this.clipInfo, this.count);
-    clip.render();
+    clip.renderCurrentClip();
     console.log(this.allData);
-
     const nextButton = document.querySelector('.next');
     const prevButton = document.querySelector('.prev');
     const card = document.querySelector('.card-wrapper');
@@ -152,29 +155,18 @@ export default class AppModel {
     const pos = currentPos.slice(0, currentPos.indexOf('p'));
     const params = [currentPage, data, url, value];
     this.swipeSlide(card, pos, width, params);
-    // let clickCount = 1;
-    // const getData = this.getNextData.bind(this, ...params);
     nextButton.addEventListener('click', this.getNextData.bind(this, ...params));
-
     prevButton.addEventListener('click', this.getPrevData.bind(this, currentPage));
-
-    while (content.firstChild) {
-      content.removeChild(content.firstChild);
-    }
-
-    content.parentNode.removeChild(content);
   }
 
   async getClip() {
     const box = document.querySelector('input');
     const searchButton = document.querySelector('.search-button');
-    const value = box.value;
     const { url } = this.url;
     const { statisticUrl } = this.statisticUrl;
-    const { body } = document;
-
-    const searchData = this.getData.bind(this, url, statisticUrl, body, box, value);
-
-    searchButton.addEventListener('click', searchData);
+    searchButton.addEventListener('click', (e) => {
+      e.stopImmediatePropagation();
+      this.getData(url, statisticUrl, box.value);
+    });
   }
 }

@@ -8,28 +8,19 @@ export default class AppView {
     this.lastInPage = [];
   }
 
-  render() {
+  static render() {
     const cardContainer = document.createElement('section');
     const cardWrapper = document.createElement('div');
     cardWrapper.classList.add('card-wrapper');
     cardContainer.classList.add('card-container');
     document.body.appendChild(cardContainer);
     cardContainer.appendChild(cardWrapper);
-    this.renderCurrentClip();
-    // cardWrapper.innerHTML = null;
-    // const start = this.currentPage * 4;
-    // const end = start + 4;
-    // const currentItems = this.data.slice(start, end);
-    // const list = AppView.renderClip(currentItems);
-    // cardWrapper.innerHTML = list;
-    // console.log(currentItems, list);
   }
 
   renderCurrentClip() {
     const cardWrapper = document.querySelector('.card-wrapper');
     cardWrapper.innerHTML = null;
     const start = this.currentPage === 1 ? this.currentPage - 1 : (this.currentPage - 1) * 4;
-    console.log(start);
     const end = start + 4;
     const currentItems = this.data.slice(start, end);
     if (this.lastInPage) {
@@ -40,17 +31,14 @@ export default class AppView {
     }
     const list = AppView.renderClip(currentItems);
     cardWrapper.innerHTML = list;
-    console.log(111, currentItems, this.lastInPage);
   }
 
   renderPreviousClip() {
     const cardWrapper = document.querySelector('.card-wrapper');
     cardWrapper.innerHTML = null;
     const start = this.currentPage === 1 ? this.currentPage + 4 : (this.currentPage - 1) * 4;
-    // console.log(start);
     const end = start - 4;
     const currentItems = this.data.slice(end, start);
-    console.log(start, end, this.currentPage);
     const list = AppView.renderClip(currentItems);
     cardWrapper.innerHTML = list;
   }
@@ -62,20 +50,5 @@ export default class AppView {
         return `${cardEl.render()}`;
       })
       .join('');
-  }
-
-  renderNextPage() {
-    console.log(222);
-    const cardWrapper = document.querySelector('.card-wrapper');
-    cardWrapper.innerHTML = null;
-    const start = this.currentPage === 1 ? this.currentPage - 1 : (this.currentPage - 1) * 4;
-    const end = start + 4;
-    const currentItems = this.data.slice(start, end);
-    console.log(111, currentItems, this.lastInPage);
-    if (this.lastInPage) {
-      currentItems.unshift(...this.lastInPage);
-    }
-    const nextlist = AppView.renderClip(currentItems);
-    cardWrapper.innerHTML += nextlist;
   }
 }
