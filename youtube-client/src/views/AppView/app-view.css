@@ -7,6 +7,17 @@
   text-decoration: none;
 }
 
+:active, :hover, :focus {
+  outline: 0;
+  outline-offset: 0;
+}
+
+body {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: minmax(50px, 70px) 1fr minmax(70px, 100px);
+}
+
 .search-box {
     position: relative;
     left: 25%;
@@ -40,16 +51,14 @@ button {
 }
 
 .card-elem {
-  width: calc(100% / 4.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 60%;
   border: 2px solid red;
   border-radius: 7%;
   -webkit-box-shadow: 45px 15px 35px -30px  rgba(217,80,80,1);
   -moz-box-shadow: 45px 15px 35px -30px rgba(217,80,80,1);
   box-shadow: 45px 15px 35px -30px rgba(217,80,80,1);
-  /* -webkit-animation-name: example; 
-  -webkit-animation-duration: 4s; 
-  animation-name: example;
-  animation-duration: 4s; */
 }
 
 .card-elem:first-child {
@@ -94,12 +103,16 @@ button {
 .card-container {
   grid-row:2;
   overflow: hidden;
+  margin-top: 5%;
 }
 
 .card-wrapper {
+  grid-template-columns: 20% 20% 20% 20%;
+  grid-template-rows: 100vh;
+  grid-column-gap: 2%;
   position: relative;
   left: 0px;
-  display: flex;
+  display: grid;
   justify-content: space-around;
   max-height: 500px;
   transition:  0.6s ease;
@@ -124,12 +137,6 @@ button {
 .video-link:hover {
   font-size: 27px;
   color: violet;
-}
-
-body {
-  display: grid;
-  max-height: 100vh;
-  grid-template-rows: minmax(50px, 70px) 1fr minmax(70px, 100px);
 }
 
 .card-description {

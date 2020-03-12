@@ -1,6 +1,4 @@
 
-// import AppModel from '../../models/AppModel';
-
 export default class SearchView {
   static render() {
     const searchWrap = document.createElement('div');

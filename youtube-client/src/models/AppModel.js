@@ -43,6 +43,8 @@ export default class AppModel {
   }
 
   async nextPage(data, url, req) {
+    console.log(url, req);
+
     const { statisticUrl } = this.statisticUrl;
 
     const responce = await fetch(`${url}&q=${req}&pageToken=${this.token}`);
@@ -52,11 +54,10 @@ export default class AppModel {
     const idResult = await AppModel.searchById(statisticUrl, videoId);
     this.clipInfo = await AppModel.extractClipItems(idResult);
     this.allData.push(...this.clipInfo);
-    console.log(this.allData);
     return this.clipInfo;
   }
 
-  async getNextData(currentPage, data, url, value) {
+  async getNextData(currentPage, data, url, value, box) {
     this.count++;
     if (this.clickCount === 4) {
       this.clickCount = 1;
@@ -65,7 +66,7 @@ export default class AppModel {
     }
     currentPage.innerHTML = this.count;
     if (this.count % 3 === 0) {
-      const nextData = await this.nextPage(data, url, value);
+      const nextData = await this.nextPage(data, url, box);
       const lastData = this.clipInfo.slice(-3);
       lastData.push(...nextData);
       this.clipInfo = lastData;
@@ -78,7 +79,6 @@ export default class AppModel {
   }
 
   getPrevData(currentPage) {
-    // this.count--;
     if (this.count > 1) {
       this.count--;
     }
@@ -86,7 +86,6 @@ export default class AppModel {
       this.clickCount--;
     }
     currentPage.innerHTML = this.count;
-
     const prevClip = new AppView(this.allData, this.count);
     prevClip.renderPreviousClip();
   }
@@ -117,14 +116,12 @@ export default class AppModel {
 
 
   async getData(url, statisticUrl, value) {
-    console.log(value);
     this.data = '';
     this.token = '';
     this.allData = [];
     this.count = 1;
     this.clickCount = 1;
     this.clipInfo = [];
-    console.log(this.allData);
     const btnContainer = document.querySelector('.button-container');
     if (!btnContainer) {
       const buttonContainer = document.createElement('div');
@@ -140,11 +137,9 @@ export default class AppModel {
     const videoId = await AppModel.exstractClipId(data);
     const idResult = await AppModel.searchById(statisticUrl, videoId);
     this.clipInfo = await AppModel.extractClipItems(idResult);
-    console.log(this.clipInfo);
     this.allData.push(...this.clipInfo);
     const clip = new AppView(this.clipInfo, this.count);
     clip.renderCurrentClip();
-    console.log(this.allData);
     const nextButton = document.querySelector('.next');
     const prevButton = document.querySelector('.prev');
     const card = document.querySelector('.card-wrapper');
@@ -155,8 +150,15 @@ export default class AppModel {
     const pos = currentPos.slice(0, currentPos.indexOf('p'));
     const params = [currentPage, data, url, value];
     this.swipeSlide(card, pos, width, params);
-    nextButton.addEventListener('click', this.getNextData.bind(this, ...params));
-    prevButton.addEventListener('click', this.getPrevData.bind(this, currentPage));
+    nextButton.addEventListener('click', (e) => {
+      const box = document.querySelector('input');
+      e.stopImmediatePropagation();
+      this.getNextData(...params, box.value);
+    });
+    prevButton.addEventListener('click', (e) => {
+      e.stopImmediatePropagation();
+      this.getPrevData(currentPage);
+    });
   }
 
   async getClip() {
@@ -165,6 +167,7 @@ export default class AppModel {
     const { url } = this.url;
     const { statisticUrl } = this.statisticUrl;
     searchButton.addEventListener('click', (e) => {
+      e.preventDefault();
       e.stopImmediatePropagation();
       this.getData(url, statisticUrl, box.value);
     });

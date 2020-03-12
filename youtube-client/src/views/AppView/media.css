@@ -1,0 +1,13 @@
+@media screen and (max-width: 1200px) {
+    .card-wrapper {
+        grid-template-columns: repeat(3, 30%);
+        grid-template-rows: 100vh;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .card-wrapper {
+        grid-template-columns: 45% 45%;
+        grid-template-rows: 100vh;
+    }
+}
