@@ -29,6 +29,10 @@ body {
     background-color:#d6bbbb61;
 }
 
+.search-button {
+      left: 26%;
+     top: 20px;
+}
 
 .search-icon {
     position: relative;
@@ -40,8 +44,8 @@ body {
 
 button {
   position: relative;
-  left: 26%;
-  top: 20px;
+  /* left: 26%;
+  top: 20px; */
   border: none;
   width: 100px;
   height: 30px;
@@ -74,14 +78,14 @@ button {
   animation-duration: 0.5s;
 }
 .card-elem:nth-child(3) {
-  -webkit-animation-name: example; /* Chrome, Safari, Opera */
-  -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+  -webkit-animation-name: example; 
+  -webkit-animation-duration: 4s; 
   animation-name: example;
   animation-duration: 0.74s;
 }
 .card-elem:nth-child(4) {
-  -webkit-animation-name: example; /* Chrome, Safari, Opera */
-  -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+  -webkit-animation-name: example; 
+  -webkit-animation-duration: 4s; 
   animation-name: example;
   animation-duration: 0.9s;
 }
@@ -148,8 +152,17 @@ button {
 .button-container{
   grid-row: 3;
   position: relative;
-  /* top:150px; */
+  width: 50%;
   justify-self: center;
+}
+
+.slider-button {
+  display: flex;
+  justify-content: space-around;
+}
+
+.sliderbtn {
+  width: 25%;
 }
 
 @-webkit-keyframes example {
