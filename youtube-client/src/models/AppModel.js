@@ -43,10 +43,7 @@ export default class AppModel {
   }
 
   async nextPage(data, url, req) {
-    console.log(url, req);
-
     const { statisticUrl } = this.statisticUrl;
-
     const responce = await fetch(`${url}&q=${req}&pageToken=${this.token}`);
     const responsData = await responce.json();
     this.token = responsData.nextPageToken;
@@ -167,9 +164,18 @@ export default class AppModel {
     const { url } = this.url;
     const { statisticUrl } = this.statisticUrl;
     searchButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      this.getData(url, statisticUrl, box.value);
+      if (box.value) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        this.getData(url, statisticUrl, box.value);
+      }
+    });
+    document.body.addEventListener('keydown', (e) => {
+      if (e.keyCode === 13 && box.value) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        this.getData(url, statisticUrl, box.value);
+      }
     });
   }
 }

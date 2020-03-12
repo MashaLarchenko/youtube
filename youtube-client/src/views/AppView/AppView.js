@@ -34,8 +34,6 @@ export default class AppView {
   }
 
   renderPreviousClip() {
-    // let clipNumber = 4;
-    // if(window.innerWidth  1000)
     const cardWrapper = document.querySelector('.card-wrapper');
     cardWrapper.innerHTML = null;
     const start = this.currentPage === 1 ? this.currentPage + 4 : (this.currentPage - 1) * 4;
